@@ -20,9 +20,36 @@ options nouveau modeset=0
 #sudo sh cuda_10.0.130_410.48_linux # accept, yes 
 
 wget https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda_9.0.176_384.81_linux-run
-sudo sh cuda_9.0.176_384.81_linux-run # do *NOT* install drivers from these 
 
-# download appropriate cudnn and install it in the cuda folder: cannot be automated since its needs authorization on NVIDIA's servers to download: https://developer.nvidia.com/rdp/form/cudnn-download-survey
+IMPORTANT: Do NOT install the drivers when asked.
+sudo sh cuda_9.0.176_384.81_linux-run
+
+EULA appears. Click space to read, or hit "q" to exit the text. Type "accept" and hit ENTER.
+!! At the "Install NVIDIA Accelerated Graphics Driver for <OS> <Driver Version>?" prompt, answer "n" here !!
+
+Next prompts are:
+   - Install the CUDA 9.0 Toolkit?
+Enter y.
+
+    - Enter Toolkit Location                                                                                                                                       
+    -  [ default is /usr/local/cuda-9.0 ]:
+Hit ENTER to accept the default.
+
+    - Do you want to install a symbolic link at /usr/local/cuda?
+Enter y.
+
+    - Install the CUDA 9.0 Samples?
+Enter y if you want the samples and utilities.
+
+    - Enter CUDA Samples Location                                                                                                                                  
+      [ default is /home/<username> ]
+If multiple users will need access, we recommend changing the default location.
+
+Installation will begin. A logfile will be generated in /tmp/cuda_install_XXXXX.log
+
+# Download appropriate cudnn and install it in the cuda folder: cannot be automated, NVIDIA account required
+# https://developer.nvidia.com/rdp/form/cudnn-download-survey
+# You can create an account from the above link (email validation required).
 
 # install anaconda
 cd downloads
