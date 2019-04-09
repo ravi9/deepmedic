@@ -17,19 +17,15 @@ class TrainConfig(Config):
     #Optional but highly suggested.
     SESSION_NAME = "sessionName"
     #[REQUIRED]
-    FOLDER_OUTP = "folderForOutput" #MUST BE GIVEN
-    SAVED_MODEL = "cnnModelFilePath" #MUST BE GIVEN
+    FOLDER_OUTP = "folderForOutput"
+    SAVED_MODEL = "cnnModelFilePath"
     
     #=============TRAINING========================
-    CHANNELS_TR = "channelsTraining" #MUST BE GIVEN
+    CHANNELS_TR = "channelsTraining"
     GT_LABELS_TR = "gtLabelsTraining"
     ROI_MASKS_TR = "roiMasksTraining"
     
-    # DEPRECATED! parsed for backwards compatibility and providing a warning! Use advanced sampling options instead.
-    PERC_POS_SAMPLES_TR = "percentOfSamplesToExtractPositiveTrain"
-    
-    #~~~~Advanced Sampling~~~~~
-    DEFAULT_TR_SAMPLING = "useDefaultTrainingSamplingFromGtAndRoi"
+    #~~~~ Sampling (training) ~~~~~
     TYPE_OF_SAMPLING_TR = "typeOfSamplingForTraining"
     PROP_OF_SAMPLES_PER_CAT_TR = "proportionOfSamplesToExtractPerCategoryTraining"
     WEIGHT_MAPS_PER_CAT_FILEPATHS_TR = "weightedMapsForSamplingEachCategoryTrain"
@@ -39,6 +35,9 @@ class TrainConfig(Config):
     NUM_SUBEP = "numberOfSubepochs"
     NUM_CASES_LOADED_PERSUB = "numOfCasesLoadedPerSubepoch"
     NUM_TR_SEGMS_LOADED_PERSUB = "numberTrainingSegmentsLoadedOnGpuPerSubep"
+    BATCHSIZE_TR = "batchsize_train"
+    NUM_OF_PROC_SAMPL = "num_processes_sampling"
+    
     #~~~~~ Learning rate schedule ~~~~~
     LR_SCH_TYPE = "typeOfLearningRateSchedule"
     #Stable + Auto + Predefined.
@@ -52,35 +51,34 @@ class TrainConfig(Config):
     #Exponential
     EXPON_SCH = "paramsForExpSchedForLrAndMom"
     #~~~~ Data Augmentation~~~
-    REFL_AUGM_PER_AXIS = "reflectImagesPerAxis"
-    PERF_INT_AUGM_BOOL = "performIntAugm"
-    INT_AUGM_SHIF_MUSTD = "sampleIntAugmShiftWithMuAndStd"
-    INT_AUGM_MULT_MUSTD = "sampleIntAugmMultiWithMuAndStd"
+    AUGM_PARAMS_TR = "augm_params_tr"
     
     #============== VALIDATION ===================
     PERFORM_VAL_SAMPLES = "performValidationOnSamplesThroughoutTraining"
     PERFORM_VAL_INFERENCE = "performFullInferenceOnValidationImagesEveryFewEpochs"
     CHANNELS_VAL = "channelsValidation"
     GT_LABELS_VAL = "gtLabelsValidation"
-    #For SAMPLES Validation:
-    NUM_VAL_SEGMS_LOADED_PERSUB = "numberValidationSegmentsLoadedOnGpuPerSubep"
-    #Optional
     ROI_MASKS_VAL = "roiMasksValidation"
-    #~~~~~~~~~Full Inference~~~~~~~~
+    NUM_VAL_SEGMS_LOADED_PERSUB = "numberValidationSegmentsLoadedOnGpuPerSubep" # For val on samples.
+    BATCHSIZE_VAL_SAMPL = "batchsize_val_samples"
+    
+    #~~~~~~~~ Sampling (validation) ~~~~~~~~~~~~
+    TYPE_OF_SAMPLING_VAL = "typeOfSamplingForVal"
+    PROP_OF_SAMPLES_PER_CAT_VAL = "proportionOfSamplesToExtractPerCategoryVal"
+    WEIGHT_MAPS_PER_CAT_FILEPATHS_VAL = "weightedMapsForSamplingEachCategoryVal"
+    
+    #~~~~~~~~~ Validation by fully inferring whole validation cases ~~~~~~~~
     NUM_EPOCHS_BETWEEN_VAL_INF = "numberOfEpochsBetweenFullInferenceOnValImages"
+    BATCHSIZE_VAL_WHOLE = "batchsize_val_whole"
     NAMES_FOR_PRED_PER_CASE_VAL = "namesForPredictionsPerCaseVal"
     SAVE_SEGM_VAL = "saveSegmentationVal"
     SAVE_PROBMAPS_PER_CLASS_VAL = "saveProbMapsForEachClassVal"
+    SUFFIX_SEGM_PROB_VAL = "suffixForSegmAndProbsDictVal"
     SAVE_INDIV_FMS_VAL = "saveIndividualFmsVal"
     SAVE_4DIM_FMS_VAL = "saveAllFmsIn4DimImageVal"
     INDICES_OF_FMS_TO_SAVE_NORMAL_VAL = "minMaxIndicesOfFmsToSaveFromEachLayerOfNormalPathwayVal"
     INDICES_OF_FMS_TO_SAVE_SUBSAMPLED_VAL = "minMaxIndicesOfFmsToSaveFromEachLayerOfSubsampledPathwayVal"
     INDICES_OF_FMS_TO_SAVE_FC_VAL = "minMaxIndicesOfFmsToSaveFromEachLayerOfFullyConnectedPathwayVal"
-    #~~~~~~~~Advanced Validation Sampling~~~~~~~~~~~~
-    DEFAULT_VAL_SAMPLING = "useDefaultUniformValidationSampling"
-    TYPE_OF_SAMPLING_VAL = "typeOfSamplingForVal"
-    PROP_OF_SAMPLES_PER_CAT_VAL = "proportionOfSamplesToExtractPerCategoryVal"
-    WEIGHT_MAPS_PER_CAT_FILEPATHS_VAL = "weightedMapsForSamplingEachCategoryVal"
     
     #====OPTIMIZATION=====
     LRATE = "learningRate"
@@ -111,7 +109,13 @@ class TrainConfig(Config):
     PAD_INPUT = "padInputImagesBool"
     RUN_INP_CHECKS = "run_input_checks"
     
-
+    # ======== DEPRECATED, backwards compatibility =======
+    REFL_AUGM_PER_AXIS = "reflectImagesPerAxis"
+    PERF_INT_AUGM_BOOL = "performIntAugm"
+    INT_AUGM_SHIF_MUSTD = "sampleIntAugmShiftWithMuAndStd"
+    INT_AUGM_MULT_MUSTD = "sampleIntAugmMultiWithMuAndStd"
+    
+    
     def __init__(self, abs_path_to_cfg):
         Config.__init__(self, abs_path_to_cfg)
         

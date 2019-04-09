@@ -27,22 +27,11 @@ class TrainSessionParameters(object) :
     def errorRequireGtLabelsTraining():
         print("ERROR: Parameter \"gtLabelsTraining\" needed but not provided in config file. This parameter should provide the path to a file. That file should contain a list of paths, one for each case to train on. These paths should point to the .nii(.gz) files that contain the corresponding Ground-Truth labels for a case. Please provide it in the format: gtLabelsTraining = \"path-to-file\". The path should be given in quotes (a string, python-style). Exiting."); exit(1) 
     errReqGtTr = errorRequireGtLabelsTraining
-    
-    
     @staticmethod
-    def errorRequireSamplMasksAreProbabMapsTrain() :
-        print("ERROR: Parameter \"samplingMasksAreProbabMapsTrain\" needed but not provided in config file. This parameters is needed when parameter \"useDefaultTrainingSamplingFromGtAndRoi\" = False, in order to know whether the provided masks are probability maps or segmentation labels. Please provide parameter in the form: samplingMasksAreProbabMapsTrain = True/False. True if the masks given at \"masksForPos(Neg)SamplingTrain\" are probability maps (can be non-normalized, like weights), or False if they are binary segmentation masks. Exiting."); exit(1) 
-    errReqMasksTypeTr = errorRequireSamplMasksAreProbabMapsTrain
-    @staticmethod
-    def warnDefaultPosSamplMasksTrain() :
-        print("WARN: Parameter \"weightedMapsForPosSamplingTrain\" was not provided in config file, even though advanced training options were triggered by setting \"useDefaultTrainingSamplingFromGtAndRoi\" = False. This parameter should point to a file that lists the paths (per case/patient) to weighted-maps that indicate where to perform the sampling of training samples. Can be provided in the format: weightedMapsForPosSamplingTrain = \"path-to-file\". The target file should have one entry per case (patient). Each of them should be pointing to .nii(.gz) files that indicate where to extract the positive samples. \n\tDEFAULT: In the case it is not provided (like now!) the corresponding samples are extracted uniformly from the whole volume!")
-        return None 
-    warnDefPosMasksTr = warnDefaultPosSamplMasksTrain
-    @staticmethod
-    def warnDefaultNegSamplMasksTrain() :
-        print("WARN: Parameter \"weightedMapsForNegSamplingTrain\" was not provided in config file, even though advanced training options were triggered by setting \"useDefaultTrainingSamplingFromGtAndRoi\" = False. This parameter should point to a file that lists the paths (per case/patient) to weighted-maps that indicate where to perform the sampling of training samples. Can be provided in the format: weightedMapsForNegSamplingTrain = \"path-to-file\". The target file should have one entry per case (patient). Each of them should be pointing to .nii(.gz) files that indicate where to extract the negative samples. \n\tDEFAULT: In the case it is not provided (like now!) the corresponding samples are extracted uniformly from the whole volume!")
-        return None
-    warnDefNegMasksTr = warnDefaultNegSamplMasksTrain
+    def errorRequireBatchsizeTrain():
+        print("ERROR: Please provide size of batch size in train-config. See parameter \'batchsize\'. Exiting."); exit(1) 
+    errReqBatchSizeTr = errorRequireBatchsizeTrain
+
     @staticmethod
     def errorRequirePredefinedLrSched() :
         print("ERROR: Parameter \"typeOfLearningRateSchedule\" was set to \"predefined\", but no predefined schedule was given. Please specify at which epochs to lower the Learning Rate, by providing the corresponding parameter in the format: predefinedSchedule = [epoch-for-1st-decrease, ..., epoch-for-last-decrease], where the epochs are specified by an integer > 0. Exiting."); exit(1)
@@ -67,25 +56,6 @@ class TrainSessionParameters(object) :
     @staticmethod
     def errorRequireNamesOfPredictionsVal() :
         print("ERROR: It was requested to perform full-inference on validation images by setting parameter \"performFullInferenceOnValidationImagesEveryFewEpochs\" to True and then save some of the results (segmentation maps, probability maps or feature maps), either manually or by default. For this, it is required to specify the path to a file, which should contain names to give to the results. Please specify the path to such a file in the format: namesForPredictionsPerCaseVal = \"./validation/validationNamesOfPredictionsSimple.cfg\" (python-style string). Exiting!"); exit(1)
-    @staticmethod
-    def errorRequirePercentOfPosSamplesVal():
-        print("ERROR: Advanced sampling was enabled by setting: useDefaultUniformValidationSampling = False. This requires providing the percentage of validation samples that should be extracted as positives (from the positive weight-map). Please specify a float between 0.0 and 1.0, eg in the format: percentOfSamplesToExtractPositiveVal = 0.5. Exiting!"); exit(1)
-    errReqPercPosTrVal = errorRequirePercentOfPosSamplesVal
-    @staticmethod
-    def warnDefaultPercentOfPosSamplesVal():
-        print("WARN: Advanced sampling was enabled by setting: useDefaultUniformValidationSampling = False. This requires providing the percentage of validation samples that should be extracted as positives (from the positive weight-map). Please specify a float between 0.0 and 1.0, eg in the format: percentOfSamplesToExtractPositiveVal = 0.5. \n\tDEFAULT: In the case not given (like now!) default value of 0.5 is used!")
-        return 0.5
-    warnDefPercPosTrVal = warnDefaultPercentOfPosSamplesVal
-    @staticmethod
-    def warnDefaultPosSamplMasksVal() :
-        print("WARN: Parameter \"weightedMapsForPosSamplingVal\" was not provided in config file, even though advanced validation-sampling options were triggered by setting \"useDefaultUniformValidationSampling\" = False. This parameter should point to a file that lists the paths (per case/patient) to weighted-maps that indicate where to perform the sampling of validation samples. Can be provided in the format: weightedMapsForPosSamplingVal = \"path-to-file\". The target file should have one entry per case (patient). Each of them should be pointing to .nii(.gz) files that indicate where to extract the positive samples. \n\tDEFAULT: In the case it is not provided (like now!) the corresponding samples are extracted uniformly from the whole volume!")
-        return None 
-    warnDefPosMasksVal = warnDefaultPosSamplMasksVal
-    @staticmethod
-    def warnDefaultNegSamplMasksVal() :
-        print("WARN: Parameter \"weightedMapsForNegSamplingVal\" was not provided in config file, even though advanced  validation-sampling options were triggered by setting \"useDefaultUniformValidationSampling\" = False. This parameter should point to a file that lists the paths (per case/patient) to weighted-maps that indicate where to perform the sampling of validation samples. Can be provided in the format: weightedMapsForNegSamplingVal = \"path-to-file\". The target file should have one entry per case (patient). Each of them should be pointing to .nii(.gz) files that indicate where to extract the negative samples. \n\tDEFAULT: In the case it is not provided (like now!) the corresponding samples are extracted uniformly from the whole volume!")
-        return None
-    warnDefNegMasksVal = warnDefaultNegSamplMasksVal
     
     @staticmethod
     def errorRequireOptimizer012() :
@@ -99,18 +69,6 @@ class TrainSessionParameters(object) :
     @staticmethod
     def errorRequireMomNonNorm0Norm1() :
         print("ERROR: The parameter \"momNonNorm0orNormalized1\" must be given 0 or 1. Omit for default. Exiting!"); exit(1)
-        
-    # Deprecated :
-    @staticmethod
-    def errorDeprecatedPercPosTraining():
-        print("ERROR: Parameter \"percentOfSamplesToExtractPositiveTrain\" in the config file is now Deprecated! "+\
-              " Please remove this entry from the train-config file. If you do not want the default behaviour but "+\
-              "instead wish to specify the proportion of Foreground and Background samples yourself, please "+\
-              " activate the \"Advanced Sampling\" options (useDefaultTrainingSamplingFromGtAndRoi=False), "+\
-              " choose type-of-sampling Foreground/Background (typeOfSamplingForTraining = 0) and use the new "+\
-              "variable \"proportionOfSamplesToExtractPerCategoryTraining\" which replaces the functionality of the deprecated "+\
-              "(eg. proportionOfSamplesToExtractPerCategoryTraining = [0.3, 0.7]). Exiting."); exit(1) 
-    errDeprPercPosTr = errorDeprecatedPercPosTraining
     
     def __init__(self,
                 log,
@@ -150,41 +108,27 @@ class TrainSessionParameters(object) :
         self.providedRoiMasksTrain = True if cfg[cfg.ROI_MASKS_TR] else False
         self.roiMasksFilepathsTrain = parseAbsFileLinesInList( getAbsPathEvenIfRelativeIsGiven(cfg[cfg.ROI_MASKS_TR], abs_path_to_cfg) ) if self.providedRoiMasksTrain else []
         
-        if cfg[cfg.PERC_POS_SAMPLES_TR] is not None : #Deprecated. Issue error and ask for correction.
-            self.errDeprPercPosTr()
-        #~~~~~~~~~Advanced Sampling~~~~~~~
-        #ADVANCED CONFIG IS DISABLED HERE IF useDefaultSamplingFromGtAndRoi = True!
-        self.useDefaultTrainingSamplingFromGtAndRoi = cfg[cfg.DEFAULT_TR_SAMPLING] if cfg[cfg.DEFAULT_TR_SAMPLING] is not None else True
-        DEFAULT_SAMPLING_TYPE_TR = 0
-        if self.useDefaultTrainingSamplingFromGtAndRoi :
-            self.samplingTypeInstanceTrain = samplingType.SamplingType( self.log, DEFAULT_SAMPLING_TYPE_TR, num_classes )
+        samplingTypeToUseTr = cfg[cfg.TYPE_OF_SAMPLING_TR] if cfg[cfg.TYPE_OF_SAMPLING_TR] is not None else 3
+        self.samplingTypeInstanceTrain = samplingType.SamplingType( self.log, samplingTypeToUseTr, num_classes)
+        if samplingTypeToUseTr in [0,3] and cfg[cfg.PROP_OF_SAMPLES_PER_CAT_TR] is not None :
+            self.samplingTypeInstanceTrain.setPercentOfSamplesPerCategoryToSample( cfg[cfg.PROP_OF_SAMPLES_PER_CAT_TR] )
+        else :
             numberOfCategoriesOfSamplesTr = self.samplingTypeInstanceTrain.getNumberOfCategoriesToSample()
             self.samplingTypeInstanceTrain.setPercentOfSamplesPerCategoryToSample( [1.0/numberOfCategoriesOfSamplesTr]*numberOfCategoriesOfSamplesTr )
-            self.forEachSamplingCategory_aListOfFilepathsToWeightMapsOfEachPatientTraining = None
-        else :
-            samplingTypeToUseTr = cfg[cfg.TYPE_OF_SAMPLING_TR] if cfg[cfg.TYPE_OF_SAMPLING_TR] is not None else DEFAULT_SAMPLING_TYPE_TR
-            self.samplingTypeInstanceTrain = samplingType.SamplingType( self.log, samplingTypeToUseTr, num_classes)
-            if samplingTypeToUseTr in [0,3] and cfg[cfg.PROP_OF_SAMPLES_PER_CAT_TR] :
-                self.samplingTypeInstanceTrain.setPercentOfSamplesPerCategoryToSample( cfg[cfg.PROP_OF_SAMPLES_PER_CAT_TR] )
-            else :
-                numberOfCategoriesOfSamplesTr = self.samplingTypeInstanceTrain.getNumberOfCategoriesToSample()
-                self.samplingTypeInstanceTrain.setPercentOfSamplesPerCategoryToSample( [1.0/numberOfCategoriesOfSamplesTr]*numberOfCategoriesOfSamplesTr )
-                
-            # This could be shortened.
-            if cfg[cfg.WEIGHT_MAPS_PER_CAT_FILEPATHS_TR] :
-                #[[case1-weightMap1, ..., caseN-weightMap1], [case1-weightMap2,...,caseN-weightMap2]]
-                listOfAListPerWeightMapCategoryWithFilepathsOfAllCasesTrain = [parseAbsFileLinesInList(getAbsPathEvenIfRelativeIsGiven(weightMapConfPath, abs_path_to_cfg)) for weightMapConfPath in cfg[cfg.WEIGHT_MAPS_PER_CAT_FILEPATHS_TR]]
-            else :
-                listOfAListPerWeightMapCategoryWithFilepathsOfAllCasesTrain = None
-            self.forEachSamplingCategory_aListOfFilepathsToWeightMapsOfEachPatientTraining = listOfAListPerWeightMapCategoryWithFilepathsOfAllCasesTrain #If None, following bool will turn False.
             
-        self.providedWeightMapsToSampleForEachCategoryTraining = True if self.forEachSamplingCategory_aListOfFilepathsToWeightMapsOfEachPatientTraining else False 
+        self.paths_to_wmaps_per_sampl_cat_per_subj_train = None
+        if cfg[cfg.WEIGHT_MAPS_PER_CAT_FILEPATHS_TR] is not None :
+            #[[case1-weightMap1, ..., caseN-weightMap1], [case1-weightMap2,...,caseN-weightMap2]]
+            self.paths_to_wmaps_per_sampl_cat_per_subj_train = [parseAbsFileLinesInList(getAbsPathEvenIfRelativeIsGiven(weightMapConfPath, abs_path_to_cfg)) for weightMapConfPath in cfg[cfg.WEIGHT_MAPS_PER_CAT_FILEPATHS_TR]]
+        self.providedWeightMapsToSampleForEachCategoryTraining = self.paths_to_wmaps_per_sampl_cat_per_subj_train is not None
         
         #~~~~~~~~ Training Cycle ~~~~~~~~~~~
         self.numberOfEpochs = cfg[cfg.NUM_EPOCHS] if cfg[cfg.NUM_EPOCHS] is not None else 35
         self.numberOfSubepochs = cfg[cfg.NUM_SUBEP] if cfg[cfg.NUM_SUBEP] is not None else 20
-        self.numOfCasesLoadedPerSubepoch = cfg[cfg.NUM_CASES_LOADED_PERSUB] if cfg[cfg.NUM_CASES_LOADED_PERSUB] is not None else 50
-        self.segmentsLoadedOnGpuPerSubepochTrain = cfg[cfg.NUM_TR_SEGMS_LOADED_PERSUB] if cfg[cfg.NUM_TR_SEGMS_LOADED_PERSUB] is not None else 1000
+        self.max_n_cases_per_subep_train = cfg[cfg.NUM_CASES_LOADED_PERSUB] if cfg[cfg.NUM_CASES_LOADED_PERSUB] is not None else 50
+        self.n_samples_per_subep_train = cfg[cfg.NUM_TR_SEGMS_LOADED_PERSUB] if cfg[cfg.NUM_TR_SEGMS_LOADED_PERSUB] is not None else 1000
+        self.batchsize_train = cfg[cfg.BATCHSIZE_TR] if cfg[cfg.BATCHSIZE_TR] is not None else errReqBatchSizeTr()
+        self.num_parallel_proc_sampling = cfg[cfg.NUM_OF_PROC_SAMPL] if cfg[cfg.NUM_OF_PROC_SAMPL] is not None else 0
         
         #~~~~~~~ Learning Rate Schedule ~~~~~~~~
         
@@ -207,23 +151,19 @@ class TrainSessionParameters(object) :
             self.errReqPredLrSch()
         
         #~~~~~~~~~~~~~~ Augmentation~~~~~~~~~~~~~~
-        self.reflectImagesPerAxis = cfg[cfg.REFL_AUGM_PER_AXIS] if cfg[cfg.REFL_AUGM_PER_AXIS] else [False, False, False]
-        self.performIntAugm = cfg[cfg.PERF_INT_AUGM_BOOL] if cfg[cfg.PERF_INT_AUGM_BOOL] is not None else False
-        if self.performIntAugm :
-            self.sampleIntAugmShiftWithMuAndStd = cfg[cfg.INT_AUGM_SHIF_MUSTD] if cfg[cfg.INT_AUGM_SHIF_MUSTD] else [0.0 , 0.05]
-            self.sampleIntAugmMultiWithMuAndStd = cfg[cfg.INT_AUGM_MULT_MUSTD] if cfg[cfg.INT_AUGM_MULT_MUSTD] else [1.0 , 0.01]
-            self.doIntAugm_shiftMuStd_multiMuStd = [True, self.sampleIntAugmShiftWithMuAndStd, self.sampleIntAugmMultiWithMuAndStd]
-        else :
-            self.doIntAugm_shiftMuStd_multiMuStd = [False, 'plcholder', [], []]
-            
+        self.augm_params_tr = {'hist_dist': None, 'reflect': None, 'rotate90': None}
+        if cfg[cfg.AUGM_PARAMS_TR] is not None:
+            for key in cfg[cfg.AUGM_PARAMS_TR]:
+                self.augm_params_tr[key] = cfg[cfg.AUGM_PARAMS_TR][key] # For exact form of parameters, see ./deepmedic/dataManagement/augmentation.py
+        
         #===================VALIDATION========================
-        self.performValidationOnSamplesThroughoutTraining = cfg[cfg.PERFORM_VAL_SAMPLES] if cfg[cfg.PERFORM_VAL_SAMPLES] is not None else False
-        if self.lr_sched_params['type'] == 'auto' and not self.performValidationOnSamplesThroughoutTraining :
+        self.val_on_samples_during_train = cfg[cfg.PERFORM_VAL_SAMPLES] if cfg[cfg.PERFORM_VAL_SAMPLES] is not None else False
+        if self.lr_sched_params['type'] == 'auto' and not self.val_on_samples_during_train :
             self.errorAutoRequiresValSamples()
-        self.performFullInferenceOnValidationImagesEveryFewEpochs = cfg[cfg.PERFORM_VAL_INFERENCE] if cfg[cfg.PERFORM_VAL_INFERENCE] is not None else False
+        self.val_on_whole_volumes = cfg[cfg.PERFORM_VAL_INFERENCE] if cfg[cfg.PERFORM_VAL_INFERENCE] is not None else False
         
         #Input:
-        if self.performValidationOnSamplesThroughoutTraining or self.performFullInferenceOnValidationImagesEveryFewEpochs :
+        if self.val_on_samples_during_train or self.val_on_whole_volumes :
             if cfg[cfg.CHANNELS_VAL] :
                 listOfAListPerChannelWithFilepathsOfAllCasesVal = [parseAbsFileLinesInList(getAbsPathEvenIfRelativeIsGiven(channelConfPath, abs_path_to_cfg)) for channelConfPath in cfg[cfg.CHANNELS_VAL]]
                 #[[case1-ch1, case1-ch2], ..., [caseN-ch1, caseN-ch2]]
@@ -233,9 +173,9 @@ class TrainSessionParameters(object) :
                 
         else :
             self.channelsFilepathsVal = []
-        if self.performValidationOnSamplesThroughoutTraining :
+        if self.val_on_samples_during_train :
             self.gtLabelsFilepathsVal = parseAbsFileLinesInList( getAbsPathEvenIfRelativeIsGiven(cfg[cfg.GT_LABELS_VAL], abs_path_to_cfg) ) if cfg[cfg.GT_LABELS_VAL] is not None else self.errorReqGtLabelsVal()
-        elif self.performFullInferenceOnValidationImagesEveryFewEpochs :
+        elif self.val_on_whole_volumes :
             self.gtLabelsFilepathsVal = parseAbsFileLinesInList( getAbsPathEvenIfRelativeIsGiven(cfg[cfg.GT_LABELS_VAL], abs_path_to_cfg) ) if cfg[cfg.GT_LABELS_VAL] is not None else []
         else : # Dont perform either of the two validations.
             self.gtLabelsFilepathsVal = []
@@ -246,51 +186,43 @@ class TrainSessionParameters(object) :
         self.roiMasksFilepathsVal = parseAbsFileLinesInList( getAbsPathEvenIfRelativeIsGiven(cfg[cfg.ROI_MASKS_VAL], abs_path_to_cfg) ) if self.providedRoiMasksVal else []
         
         #~~~~~Validation on Samples~~~~~~~~
-        self.segmentsLoadedOnGpuPerSubepochVal = cfg[cfg.NUM_VAL_SEGMS_LOADED_PERSUB] if cfg[cfg.NUM_VAL_SEGMS_LOADED_PERSUB] is not None else 3000
+        self.n_samples_per_subep_val = cfg[cfg.NUM_VAL_SEGMS_LOADED_PERSUB] if cfg[cfg.NUM_VAL_SEGMS_LOADED_PERSUB] is not None else 3000
+        self.batchsize_val_samples = cfg[cfg.BATCHSIZE_VAL_SAMPL] if cfg[cfg.BATCHSIZE_VAL_SAMPL] is not None else 50
         
-        #~~~~~~~~~Advanced Validation Sampling~~~~~~~~~~~
-        #ADVANCED OPTION ARE DISABLED IF useDefaultUniformValidationSampling = True!
-        self.useDefaultUniformValidationSampling = cfg[cfg.DEFAULT_VAL_SAMPLING] if cfg[cfg.DEFAULT_VAL_SAMPLING] is not None else True
-        DEFAULT_SAMPLING_TYPE_VAL = 1
-        if self.useDefaultUniformValidationSampling :
-            self.samplingTypeInstanceVal = samplingType.SamplingType( self.log, DEFAULT_SAMPLING_TYPE_VAL, num_classes )
+        #~~~~~~~~~ Sampling (Validation) ~~~~~~~~~~~
+        samplingTypeToUseVal = cfg[cfg.TYPE_OF_SAMPLING_VAL] if cfg[cfg.TYPE_OF_SAMPLING_VAL] is not None else 1
+        self.samplingTypeInstanceVal = samplingType.SamplingType( self.log, samplingTypeToUseVal, num_classes)
+        if samplingTypeToUseVal in [0,3] and cfg[cfg.PROP_OF_SAMPLES_PER_CAT_VAL] is not None:
+            self.samplingTypeInstanceVal.setPercentOfSamplesPerCategoryToSample( cfg[cfg.PROP_OF_SAMPLES_PER_CAT_VAL] )
+        else :
             numberOfCategoriesOfSamplesVal = self.samplingTypeInstanceVal.getNumberOfCategoriesToSample()
             self.samplingTypeInstanceVal.setPercentOfSamplesPerCategoryToSample( [1.0/numberOfCategoriesOfSamplesVal]*numberOfCategoriesOfSamplesVal )
-            self.perSamplingCat_aListOfFilepathsToWeightMapsOfEachCaseVal = None
-        else :
-            samplingTypeToUseVal = cfg[cfg.TYPE_OF_SAMPLING_VAL] if cfg[cfg.TYPE_OF_SAMPLING_VAL] is not None else DEFAULT_SAMPLING_TYPE_VAL
-            self.samplingTypeInstanceVal = samplingType.SamplingType( self.log, samplingTypeToUseVal, num_classes)
-            if samplingTypeToUseVal in [0,3] and cfg[cfg.PROP_OF_SAMPLES_PER_CAT_VAL] :
-                self.samplingTypeInstanceVal.setPercentOfSamplesPerCategoryToSample( cfg[cfg.PROP_OF_SAMPLES_PER_CAT_VAL] )
-            else :
-                numberOfCategoriesOfSamplesVal = self.samplingTypeInstanceVal.getNumberOfCategoriesToSample()
-                self.samplingTypeInstanceVal.setPercentOfSamplesPerCategoryToSample( [1.0/numberOfCategoriesOfSamplesVal]*numberOfCategoriesOfSamplesVal )
-                
-            # TODO: Shorten this
-            if cfg[cfg.WEIGHT_MAPS_PER_CAT_FILEPATHS_VAL] :
-                #[[case1-weightMap1, ..., caseN-weightMap1], [case1-weightMap2,...,caseN-weightMap2]]
-                self.perSamplingCat_aListOfFilepathsToWeightMapsOfEachCaseVal = [parseAbsFileLinesInList(getAbsPathEvenIfRelativeIsGiven(weightMapConfPath, abs_path_to_cfg)) for weightMapConfPath in cfg[cfg.WEIGHT_MAPS_PER_CAT_FILEPATHS_VAL]]
-            else :
-                self.perSamplingCat_aListOfFilepathsToWeightMapsOfEachCaseVal = None
-                
-        self.providedWeightMapsToSampleForEachCategoryValidation = True if self.perSamplingCat_aListOfFilepathsToWeightMapsOfEachCaseVal else False 
+            
+        self.paths_to_wmaps_per_sampl_cat_per_subj_val = None
+        if cfg[cfg.WEIGHT_MAPS_PER_CAT_FILEPATHS_VAL] is not None:
+            #[[case1-weightMap1, ..., caseN-weightMap1], [case1-weightMap2,...,caseN-weightMap2]]
+            self.paths_to_wmaps_per_sampl_cat_per_subj_val = [parseAbsFileLinesInList(getAbsPathEvenIfRelativeIsGiven(weightMapConfPath, abs_path_to_cfg)) for weightMapConfPath in cfg[cfg.WEIGHT_MAPS_PER_CAT_FILEPATHS_VAL]]
+        self.providedWeightMapsToSampleForEachCategoryValidation = self.paths_to_wmaps_per_sampl_cat_per_subj_val is not None
         
         #~~~~~~Full inference on validation image~~~~~~
-        self.numberOfEpochsBetweenFullInferenceOnValImages = cfg[cfg.NUM_EPOCHS_BETWEEN_VAL_INF] if cfg[cfg.NUM_EPOCHS_BETWEEN_VAL_INF] is not None else 1
-        if self.numberOfEpochsBetweenFullInferenceOnValImages == 0 and self.performFullInferenceOnValidationImagesEveryFewEpochs :
+        self.num_epochs_between_val_on_whole_volumes = cfg[cfg.NUM_EPOCHS_BETWEEN_VAL_INF] if cfg[cfg.NUM_EPOCHS_BETWEEN_VAL_INF] is not None else 1
+        if self.num_epochs_between_val_on_whole_volumes == 0 and self.val_on_whole_volumes :
             self.errorReqNumberOfEpochsBetweenFullValInfGreaterThan0()
-            
+        
+        self.batchsize_val_whole = cfg[cfg.BATCHSIZE_VAL_WHOLE] if cfg[cfg.BATCHSIZE_VAL_WHOLE] is not None else 10
+        
         #predictions
         self.saveSegmentationVal = cfg[cfg.SAVE_SEGM_VAL] if cfg[cfg.SAVE_SEGM_VAL] is not None else True
         self.saveProbMapsBoolPerClassVal = cfg[cfg.SAVE_PROBMAPS_PER_CLASS_VAL] if (cfg[cfg.SAVE_PROBMAPS_PER_CLASS_VAL] is not None and cfg[cfg.SAVE_PROBMAPS_PER_CLASS_VAL] != []) else [True]*num_classes
         self.filepathsToSavePredictionsForEachPatientVal = None #Filled by call to self.makeFilepathsForPredictionsAndFeatures()
+        self.suffixForSegmAndProbsDictVal = cfg[cfg.SUFFIX_SEGM_PROB_VAL] if cfg[cfg.SUFFIX_SEGM_PROB_VAL] is not None else {"segm": "Segm", "prob": "ProbMapClass"}
         #features:
         self.saveIndividualFmImagesVal = cfg[cfg.SAVE_INDIV_FMS_VAL] if cfg[cfg.SAVE_INDIV_FMS_VAL] is not None else False
         self.saveMultidimensionalImageWithAllFmsVal = cfg[cfg.SAVE_4DIM_FMS_VAL] if cfg[cfg.SAVE_4DIM_FMS_VAL] is not None else False
         if self.saveIndividualFmImagesVal == True or self.saveMultidimensionalImageWithAllFmsVal == True:
-            indices_fms_per_pathtype_per_layer_to_save =   [cfg[cfg.INDICES_OF_FMS_TO_SAVE_NORMAL_VAL]] +\
-                                                                    [cfg[cfg.INDICES_OF_FMS_TO_SAVE_SUBSAMPLED_VAL]] +\
-                                                                    [cfg[cfg.INDICES_OF_FMS_TO_SAVE_FC_VAL]]
+            indices_fms_per_pathtype_per_layer_to_save = [cfg[cfg.INDICES_OF_FMS_TO_SAVE_NORMAL_VAL]] +\
+                                                         [cfg[cfg.INDICES_OF_FMS_TO_SAVE_SUBSAMPLED_VAL]] +\
+                                                         [cfg[cfg.INDICES_OF_FMS_TO_SAVE_FC_VAL]]
             self.indices_fms_per_pathtype_per_layer_to_save = [item if item is not None else [] for item in indices_fms_per_pathtype_per_layer_to_save] #By default, save none.
         else:
             self.indices_fms_per_pathtype_per_layer_to_save = None
@@ -299,7 +231,7 @@ class TrainSessionParameters(object) :
         #Output:
         #Given by the config file, and is then used to fill filepathsToSavePredictionsForEachPatient and filepathsToSaveFeaturesForEachPatient.
         self.namesToSavePredictionsAndFeaturesVal = parseFileLinesInList( getAbsPathEvenIfRelativeIsGiven(cfg[cfg.NAMES_FOR_PRED_PER_CASE_VAL], abs_path_to_cfg) ) if cfg[cfg.NAMES_FOR_PRED_PER_CASE_VAL] else None #CAREFUL: Here we use a different parsing function!
-        if not self.namesToSavePredictionsAndFeaturesVal and self.performFullInferenceOnValidationImagesEveryFewEpochs and (self.saveSegmentationVal or True in self.saveProbMapsBoolPerClassVal or self.saveIndividualFmImagesVal or self.saveMultidimensionalImageWithAllFmsVal) :
+        if not self.namesToSavePredictionsAndFeaturesVal and self.val_on_whole_volumes and (self.saveSegmentationVal or True in self.saveProbMapsBoolPerClassVal or self.saveIndividualFmImagesVal or self.saveMultidimensionalImageWithAllFmsVal) :
             self.errorRequireNamesOfPredictionsVal()
             
         #===================== OTHERS======================
@@ -312,9 +244,6 @@ class TrainSessionParameters(object) :
         self.run_input_checks = cfg[cfg.RUN_INP_CHECKS] if cfg[cfg.RUN_INP_CHECKS] is not None else True
         
         #HIDDENS, no config allowed for these at the moment:
-        self.useSameSubChannelsAsSingleScale = True
-        self.subsampledChannelsFilepathsTrain = "placeholder" #List of Lists with filepaths per patient. Only used when above is False.
-        self.subsampledChannelsFilepathsVal = "placeholder" #List of Lists with filepaths per patient. Only used when above is False.
         
         # Re-weight samples in the cost function *on a per-class basis*: Type of re-weighting and training schedule.
         # E.g. to exclude a class, or counter class imbalance.
@@ -372,28 +301,45 @@ class TrainSessionParameters(object) :
         
         self.losses_and_weights = cfg[cfg.LOSSES_WEIGHTS] if cfg[cfg.LOSSES_WEIGHTS] is not None else {"xentr": 1.0, "iou": None, "dsc": None}
         assert True in [ self.losses_and_weights[k] is not None for k in ["xentr", "iou", "dsc"] ]
+        
+        self._backwards_compat_with_deprecated_cfg(cfg)
+        
         """
         #NOTES: variables that have to do with number of pathways: 
                 self.indicesOfLayersPerPathwayTypeToFreeze (="all" always currently. Hardcoded)
-                self.useSameSubChannelsAsSingleScale, (always True currently)
-                self.subsampledChannelsFilepathsTrain,
-                self.subsampledChannelsFilepathsVal, (Deprecated. But I should support it in future, cause it works well for non-scale pathways)
                 indices_fms_per_pathtype_per_layer_to_save (Repeat subsampled!)
         """
         
-    def _makeFilepathsForPredictionsAndFeaturesVal(self,
-                                            absPathToFolderForPredictionsFromSession,
-                                            absPathToFolderForFeaturesFromSession
-                                            ) :
+    def _backwards_compat_with_deprecated_cfg(self, cfg):
+        # Augmentation
+        if cfg[cfg.REFL_AUGM_PER_AXIS] is not None:
+            self.augm_params_tr['reflect'] = [ 0.5 if bool else 0. for bool in cfg[cfg.REFL_AUGM_PER_AXIS] ]
+        if cfg[cfg.PERF_INT_AUGM_BOOL] == True:
+            self.augm_params_tr['hist_dist'] = {'shift': {'mu': cfg[cfg.INT_AUGM_SHIF_MUSTD][0], 'std': cfg[cfg.INT_AUGM_SHIF_MUSTD][1]},
+                                                'scale': {'mu': cfg[cfg.INT_AUGM_MULT_MUSTD][0], 'std': cfg[cfg.INT_AUGM_MULT_MUSTD][1]} }
+    
+    def _makeFilepathsForPredictionsAndFeaturesVal( self,
+                                                    absPathToFolderForPredictionsFromSession,
+                                                    absPathToFolderForFeaturesFromSession
+                                                    ) :
         self.filepathsToSavePredictionsForEachPatientVal = []
         self.filepathsToSaveFeaturesForEachPatientVal = []
-        if self.namesToSavePredictionsAndFeaturesVal is not None :
+        if self.namesToSavePredictionsAndFeaturesVal is not None : # standard behavior
             for case_i in range(self.numberOfCasesVal) :
                 filepathForCasePrediction = absPathToFolderForPredictionsFromSession + "/" + self.namesToSavePredictionsAndFeaturesVal[case_i]
                 self.filepathsToSavePredictionsForEachPatientVal.append( filepathForCasePrediction )
                 filepathForCaseFeatures = absPathToFolderForFeaturesFromSession + "/" + self.namesToSavePredictionsAndFeaturesVal[case_i]
                 self.filepathsToSaveFeaturesForEachPatientVal.append( filepathForCaseFeatures )
-                
+        else : # Names for predictions not given. Special handling...
+            if self.numberOfCasesVal > 1 : # Many cases, create corresponding namings for files.
+                for case_i in range(self.numberOfCasesVal) :
+                    self.filepathsToSavePredictionsForEachPatientVal.append( absPathToFolderForPredictionsFromSession + "/pred_case" + str(case_i) + ".nii.gz" )
+                    self.filepathsToSaveFeaturesForEachPatientVal.append( absPathToFolderForPredictionsFromSession + "/pred_case" + str(case_i) + ".nii.gz" )
+            else : # Only one case. Just give the output prediction folder, the io.py will save output accordingly.
+                self.filepathsToSavePredictionsForEachPatientVal.append( absPathToFolderForPredictionsFromSession )
+                self.filepathsToSaveFeaturesForEachPatientVal.append( absPathToFolderForPredictionsFromSession )
+    
+    
     def get_path_to_load_model_from(self):
         return self.savedModelFilepath
     
@@ -417,23 +363,23 @@ class TrainSessionParameters(object) :
         logPrint("Filepaths to Channels of the Training Cases = " + str(self.channelsFilepathsTrain))
         logPrint("Filepaths to Ground-Truth labels of the Training Cases = " + str(self.gtLabelsFilepathsTrain))
         
-        logPrint("~~Sampling~~")
+        logPrint("~~ Sampling (train) ~~")
         logPrint("Region-Of-Interest Masks provided = " + str(self.providedRoiMasksTrain))
         logPrint("Filepaths to ROI Masks of the Training Cases = " + str(self.roiMasksFilepathsTrain))
         
-        logPrint("~~Advanced Sampling~~")
-        logPrint("Using default sampling = " + str(self.useDefaultTrainingSamplingFromGtAndRoi) + ". NOTE: Adv.Sampl.Params are auto-set to perform default sampling if True.")
         logPrint("Type of Sampling = " + str(self.samplingTypeInstanceTrain.getStringOfSamplingType()) + " ("+ str(self.samplingTypeInstanceTrain.getIntSamplingType()) + ")")
         logPrint("Sampling Categories = " + str(self.samplingTypeInstanceTrain.getStringsPerCategoryToSample()) )
         logPrint("Percent of Samples to extract per Sampling Category = " + str(self.samplingTypeInstanceTrain.getPercentOfSamplesPerCategoryToSample()))
         logPrint("Provided Weight-Maps, pointing where to focus sampling for each category (if False, samples will be extracted based on GT and ROI) = " + str(self.providedWeightMapsToSampleForEachCategoryTraining))
-        logPrint("Paths to weight-maps for sampling of each category = " + str(self.forEachSamplingCategory_aListOfFilepathsToWeightMapsOfEachPatientTraining))
+        logPrint("Paths to weight-Maps for sampling of each category = " + str(self.paths_to_wmaps_per_sampl_cat_per_subj_train))
         
         logPrint("~~Training Cycle~~")
         logPrint("Number of Epochs = " + str(self.numberOfEpochs))
         logPrint("Number of Subepochs per epoch = " + str(self.numberOfSubepochs))
-        logPrint("Number of cases to load per Subepoch (for extracting the samples for this subepoch) = " + str(self.numOfCasesLoadedPerSubepoch))
-        logPrint("Number of Segments loaded on GPU per subepoch for Training = " + str(self.segmentsLoadedOnGpuPerSubepochTrain) + ". NOTE: This number of segments divided by the batch-size defines the number of optimization-iterations that will be performed every subepoch!")
+        logPrint("Number of cases to load per Subepoch (for extracting the samples for this subepoch) = " + str(self.max_n_cases_per_subep_train))
+        logPrint("Number of Segments loaded per subepoch for Training = " + str(self.n_samples_per_subep_train) + ". NOTE: This number of segments divided by the batch-size defines the number of optimization-iterations that will be performed every subepoch!")
+        logPrint("Batch size (train) = " + str(self.batchsize_train))
+        logPrint("Number of parallel processes for sampling = " + str(self.num_parallel_proc_sampling))
         
         logPrint("~~Learning Rate Schedule~~")
         logPrint("Type of schedule = " + str(self.lr_sched_params['type']))
@@ -447,15 +393,13 @@ class TrainSessionParameters(object) :
         logPrint("[Expon] (Deprecated) parameters = " + str(self.lr_sched_params['expon']))
         
         logPrint("~~Data Augmentation During Training~~")
-        logPrint("Reflect images per axis = " + str(self.reflectImagesPerAxis))
-        logPrint("Perform intensity-augmentation [I'= (I+shift)*mult] = " + str(self.performIntAugm))
-        logPrint("[Int. Augm.] Sample Shift from N(mu,std) = " + str(self.doIntAugm_shiftMuStd_multiMuStd[1]))
-        logPrint("[Int. Augm.] Sample Multi from N(mu,std) = " + str(self.doIntAugm_shiftMuStd_multiMuStd[2]))
-        logPrint("[Int. Augm.] (DEBUGGING:) full parameters [ doIntAugm, shift, mult] = " + str(self.doIntAugm_shiftMuStd_multiMuStd))
+        logPrint("Mu and std for shift and scale of histograms = " + str(self.augm_params_tr['hist_dist']))
+        logPrint("Probabilities of reflecting each axis = " + str(self.augm_params_tr['reflect']))
+        logPrint("Probabilities of rotating planes 0/90/180/270 degrees = " + str(self.augm_params_tr['rotate90']))
         
         logPrint("~~~~~~~~~~~~~~~~~~Validation parameters~~~~~~~~~~~~~~~~")
-        logPrint("Perform Validation on Samples throughout training? = " + str(self.performValidationOnSamplesThroughoutTraining))
-        logPrint("Perform Full Inference on validation cases every few epochs? = " + str(self.performFullInferenceOnValidationImagesEveryFewEpochs))
+        logPrint("Perform Validation on Samples throughout training? = " + str(self.val_on_samples_during_train))
+        logPrint("Perform Full Inference on validation cases every few epochs? = " + str(self.val_on_whole_volumes))
         logPrint("Filepaths to Channels of the Validation Cases (Req for either of the above) = " + str(self.channelsFilepathsVal))
         logPrint("Provided Ground-Truth for Validation = " + str(self.providedGtVal) + ". NOTE: Required for Val on samples. Not Req for Full-Inference, but DSC will be reported if provided.")
         logPrint("Filepaths to Ground-Truth labels of the Validation Cases = " + str(self.gtLabelsFilepathsVal))
@@ -463,22 +407,24 @@ class TrainSessionParameters(object) :
         logPrint("Filepaths to ROI masks for Validation Cases = " + str(self.roiMasksFilepathsVal))
         
         logPrint("~~~~~~~Validation on Samples throughout Training~~~~~~~")
-        logPrint("Number of Segments loaded on GPU per subepoch for Validation = " + str(self.segmentsLoadedOnGpuPerSubepochVal))
+        logPrint("Number of Segments loaded per subepoch for Validation = " + str(self.n_samples_per_subep_val))
+        logPrint("Batch size (val on samples) = " + str(self.batchsize_val_samples))
         
-        logPrint("~~Advanced Sampling~~")
-        logPrint("Using default uniform sampling for validation = " + str(self.useDefaultUniformValidationSampling) + ". NOTE: Adv.Sampl.Params are auto-set to perform uniform-sampling if True.")
+        logPrint("~~ Sampling (val) ~~")
         logPrint("Type of Sampling = " + str(self.samplingTypeInstanceVal.getStringOfSamplingType()) + " ("+ str(self.samplingTypeInstanceVal.getIntSamplingType()) + ")")
         logPrint("Sampling Categories = " + str(self.samplingTypeInstanceVal.getStringsPerCategoryToSample()) )
         logPrint("Percent of Samples to extract per Sampling Category = " + str(self.samplingTypeInstanceVal.getPercentOfSamplesPerCategoryToSample()))
         logPrint("Provided Weight-Maps, pointing where to focus sampling for each category (if False, samples will be extracted based on GT and ROI) = " + str(self.providedWeightMapsToSampleForEachCategoryValidation))
-        logPrint("Paths to weight-maps for sampling of each category = " + str(self.perSamplingCat_aListOfFilepathsToWeightMapsOfEachCaseVal))
+        logPrint("Paths to weight-maps for sampling of each category = " + str(self.paths_to_wmaps_per_sampl_cat_per_subj_val))
         
         logPrint("~~~~~Validation with Full Inference on Validation Cases~~~~~")
-        logPrint("Perform Full-Inference on Val. cases every that many epochs = " + str(self.numberOfEpochsBetweenFullInferenceOnValImages))
+        logPrint("Perform Full-Inference on Val. cases every that many epochs = " + str(self.num_epochs_between_val_on_whole_volumes))
+        logPrint("Batch size (val on whole volumes) = " + str(self.batchsize_val_whole))
         logPrint("~~Predictions (segmentations and prob maps on val. cases)~~")
         logPrint("Save Segmentations = " + str(self.saveSegmentationVal))
         logPrint("Save Probability Maps for each class = " + str(self.saveProbMapsBoolPerClassVal))
         logPrint("Filepaths to save results per case = " + str(self.filepathsToSavePredictionsForEachPatientVal))
+        logPrint("Suffixes with which to save segmentations and probability maps = " + str(self.suffixForSegmAndProbsDictVal))
         logPrint("~~Feature Maps~~")
         logPrint("Save Feature Maps = " + str(self.saveIndividualFmImagesVal))
         logPrint("Save FMs in a 4D-image = " + str(self.saveMultidimensionalImageWithAllFmsVal))
@@ -517,10 +463,11 @@ class TrainSessionParameters(object) :
         args = [self.log,
                 self.filepath_to_save_models,
                 
-                self.performValidationOnSamplesThroughoutTraining,
-                [self.saveSegmentationVal, self.saveProbMapsBoolPerClassVal],
+                self.val_on_samples_during_train,
+                {"segm": self.saveSegmentationVal, "prob": self.saveProbMapsBoolPerClassVal},
                 
                 self.filepathsToSavePredictionsForEachPatientVal,
+                self.suffixForSegmAndProbsDictVal,
                 
                 self.channelsFilepathsTrain,
                 self.channelsFilepathsVal,
@@ -530,39 +477,37 @@ class TrainSessionParameters(object) :
                 self.gtLabelsFilepathsVal,
                 
                 self.providedWeightMapsToSampleForEachCategoryTraining, #Always true, since either GT labels or advanced-mask-where-to-pos
-                self.forEachSamplingCategory_aListOfFilepathsToWeightMapsOfEachPatientTraining,
+                self.paths_to_wmaps_per_sampl_cat_per_subj_train,
                 self.providedWeightMapsToSampleForEachCategoryValidation, #If false, corresponding samples will be extracted uniformly from whole image.
-                self.perSamplingCat_aListOfFilepathsToWeightMapsOfEachCaseVal,
+                self.paths_to_wmaps_per_sampl_cat_per_subj_val,
                 
-                self.providedRoiMasksTrain, # also used for int-augm.
-                self.roiMasksFilepathsTrain,# also used for int-augm
-                self.providedRoiMasksVal, # also used for fast inf
-                self.roiMasksFilepathsVal, # also used for fast inf and also for uniform sampling of segs.
+                self.providedRoiMasksTrain,
+                self.roiMasksFilepathsTrain,
+                self.providedRoiMasksVal,
+                self.roiMasksFilepathsVal,
                 
                 self.numberOfEpochs,
                 self.numberOfSubepochs,
-                self.numOfCasesLoadedPerSubepoch,
-                self.segmentsLoadedOnGpuPerSubepochTrain,
-                self.segmentsLoadedOnGpuPerSubepochVal,
+                self.max_n_cases_per_subep_train,
+                self.n_samples_per_subep_train,
+                self.n_samples_per_subep_val,
+                self.num_parallel_proc_sampling,
                 
                 #-------Sampling Type---------
                 self.samplingTypeInstanceTrain,
                 self.samplingTypeInstanceVal,
+                self.batchsize_train,
+                self.batchsize_val_samples,
+                self.batchsize_val_whole,
                 
                 #-------Preprocessing-----------
                 self.padInputImagesBool,
                 #-------Data Augmentation-------
-                self.doIntAugm_shiftMuStd_multiMuStd,
-                self.reflectImagesPerAxis,
-                
-                self.useSameSubChannelsAsSingleScale,
-                
-                self.subsampledChannelsFilepathsTrain,
-                self.subsampledChannelsFilepathsVal,
-                
-                # Validation
-                self.performFullInferenceOnValidationImagesEveryFewEpochs, #Even if not providedGtForValidationBool, inference will be performed if this == True, to save the results, eg for visual.
-                self.numberOfEpochsBetweenFullInferenceOnValImages, # Should not be == 0, except if performFullInferenceOnValidationImagesEveryFewEpochsBool == False
+                self.augm_params_tr,
+                 
+                # --- Validation on whole volumes ---
+                self.val_on_whole_volumes,
+                self.num_epochs_between_val_on_whole_volumes,
                 
                 #--------For FM visualisation---------
                 self.saveIndividualFmImagesVal,
@@ -605,6 +550,7 @@ class TrainSessionParameters(object) :
                 self.eRms
                 ]
         return args
+
 
 
 

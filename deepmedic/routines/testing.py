@@ -12,46 +12,44 @@ import numpy as np
 import math
 
 from deepmedic.logging.accuracyMonitor import AccuracyOfEpochMonitorSegmentation
-from deepmedic.dataManagement.sampling import load_imgs_of_single_case
+from deepmedic.dataManagement.sampling import load_imgs_of_subject
 from deepmedic.dataManagement.sampling import getCoordsOfAllSegmentsOfAnImage
-from deepmedic.dataManagement.sampling import extractDataOfSegmentsUsingSampledSliceCoords
-from deepmedic.image.io import savePredImgToNiiWithOriginalHdr, saveFmImgToNiiWithOriginalHdr, save4DImgWithAllFmsToNiiWithOriginalHdr
-from deepmedic.image.processing import unpadCnnOutputs
+from deepmedic.dataManagement.sampling import extractSegmentsGivenSliceCoords
+from deepmedic.dataManagement.io import savePredImgToNiiWithOriginalHdr, saveFmImgToNiiWithOriginalHdr, save4DImgWithAllFmsToNiiWithOriginalHdr
+from deepmedic.dataManagement.preprocessing import unpadCnnOutputs
 
 from deepmedic.neuralnet.pathwayTypes import PathwayTypes as pt
 from deepmedic.logging.utils import strListFl4fNA, getMeanPerColOf2dListExclNA
 
 
 # Main routine for testing.
-def performInferenceOnWholeVolumes(
-                            sessionTf,
+def inferenceWholeVolumes(  sessionTf,
                             cnn3d,
                             log,
                             val_or_test,
-                            savePredictionImagesSegmentationAndProbMapsList,
-
+                            savePredictedSegmAndProbsDict,
                             listOfFilepathsToEachChannelOfEachPatient,
-                            
                             providedGtLabelsBool, #boolean. DSC calculation will be performed if this is provided.
                             listOfFilepathsToGtLabelsOfEachPatient,
-                            
                             providedRoiMaskForFastInfBool,
                             listOfFilepathsToRoiMaskFastInfOfEachPatient,
-                            
-                            listOfNamesToGiveToPredictionsIfSavingResults,
+                            namesForSavingSegmAndProbs,
+                            suffixForSegmAndProbsDict,
+                            # Hyper parameters
+                            batchsize,
                             
                             #----Preprocessing------
                             padInputImagesBool,
                             
-                            useSameSubChannelsAsSingleScale,
-                            listOfFilepathsToEachSubsampledChannelOfEachPatient,
-                            
                             #--------For FM visualisation---------
                             saveIndividualFmImagesForVisualisation,
                             saveMultidimensionalImageWithAllFms,
-                            indicesOfFmsToVisualisePerPathwayTypeAndPerLayer,#NOTE: saveIndividualFmImagesForVisualisation should contain an entry per pathwayType, even if just []. If not [], the list should contain one entry per layer of the pathway, even if just []. The layer entries, if not [], they should have to integers, lower and upper FM to visualise. Excluding the highest index.
-                            listOfNamesToGiveToFmVisualisationsIfSaving
-                            ) :
+                            indicesOfFmsToVisualisePerPathwayTypeAndPerLayer,
+                            namesForSavingFms ) :
+    # saveIndividualFmImagesForVisualisation: should contain an entry per pathwayType, even if just []...
+    #       ... If not [], the list should contain one entry per layer of the pathway, even if just [].
+    #       ... The layer entries, if not [], they should have to integers, lower and upper FM to visualise. Excluding the highest index.
+    
     validation_or_testing_str = "Validation" if val_or_test == "val" else "Testing"
     log.print3("###########################################################################################################")
     log.print3("############################# Starting full Segmentation of " + str(validation_or_testing_str) + " subjects ##########################")
@@ -64,7 +62,6 @@ def performInferenceOnWholeVolumes(
     NUMBER_OF_CLASSES = cnn3d.num_classes
     
     total_number_of_images = len(listOfFilepathsToEachChannelOfEachPatient)    
-    batch_size = cnn3d.batchSize["test"]
     
     #one dice score for whole + for each class)
     # A list of dimensions: total_number_of_images X NUMBER_OF_CLASSES
@@ -102,41 +99,30 @@ def performInferenceOnWholeVolumes(
         
         #load the image channels in cpu
         
-        [imageChannels, #a nparray(channels,dim0,dim1,dim2)
+        [imageChannels,
         gtLabelsImage, #only for accurate/correct DICE1-2 calculation
         roiMask,
         arrayWithWeightMapsWhereToSampleForEachCategory, #only used in training. Placeholder here.
-        allSubsampledChannelsOfPatientInNpArray,  #a nparray(channels,dim0,dim1,dim2)
         tupleOfPaddingPerAxesLeftRight #( (padLeftR, padRightR), (padLeftC,padRightC), (padLeftZ,padRightZ)). All 0s when no padding.
-        ] = load_imgs_of_single_case(
-                                    log,
-                                    "test",
-                                    
-                                    image_i,
-                                    
-                                    listOfFilepathsToEachChannelOfEachPatient,
-                                    
-                                    providedGtLabelsBool,
-                                    listOfFilepathsToGtLabelsOfEachPatient,
-                                    num_classes = cnn3d.num_classes,
-                                    
-                                    providedWeightMapsToSampleForEachCategory = False, # Says if weightMaps are provided. If true, must provide all. Placeholder in testing.
-                                    forEachSamplingCategory_aListOfFilepathsToWeightMapsOfEachPatient = "placeholder", # Placeholder in testing.
-                                    
-                                    providedRoiMaskBool = providedRoiMaskForFastInfBool,
-                                    listOfFilepathsToRoiMaskOfEachPatient = listOfFilepathsToRoiMaskFastInfOfEachPatient,
-                                    
-                                    useSameSubChannelsAsSingleScale = useSameSubChannelsAsSingleScale,
-                                    usingSubsampledPathways = cnn3d.numSubsPaths > 0,
-                                    listOfFilepathsToEachSubsampledChannelOfEachPatient = listOfFilepathsToEachSubsampledChannelOfEachPatient,
-                                    
-                                    padInputImagesBool = padInputImagesBool,
-                                    cnnReceptiveField = recFieldCnn, # only used if padInputsBool
-                                    dimsOfPrimeSegmentRcz = cnn3d.pathways[0].getShapeOfInput("test")[2:], # only used if padInputsBool
-                                    
-                                    reflectImageWithHalfProb = [0,0,0]
-                                    )
-        niiDimensions = list(imageChannels[0].shape)
+        ] = load_imgs_of_subject(
+                    log,
+                    None,
+                    "test",
+                    False, # run_input_checks.
+                    image_i,
+                    listOfFilepathsToEachChannelOfEachPatient,
+                    providedGtLabelsBool,
+                    listOfFilepathsToGtLabelsOfEachPatient,
+                    cnn3d.num_classes,
+                    False, # providedWeightMapsToSampleForEachCategory
+                    None,
+                    providedRoiMaskForFastInfBool,
+                    listOfFilepathsToRoiMaskFastInfOfEachPatient,
+                    padInputImagesBool,
+                    recFieldCnn, # only used if padInputsBool
+                    cnn3d.pathways[0].getShapeOfInput("test")[2:] # dimsOfPrimeSegmentRcz, for padding
+                    )
+        niiDimensions = list(imageChannels.shape[1:])
         #The predicted probability-maps for the whole volume, one per class. Will be constructed by stitching together the predictions from each segment.
         predProbMapsPerClass = np.zeros([NUMBER_OF_CLASSES]+niiDimensions, dtype = "float32")
         #create the big array that will hold all the fms (for feature extraction, to save as a big multi-dim image).
@@ -144,38 +130,36 @@ def performInferenceOnWholeVolumes(
             multidimensionalImageWithAllToBeVisualisedFmsArray =  np.zeros([totalNumberOfFMsToProcess] + niiDimensions, dtype = "float32")
             
         # Tile the image and get all slices of the segments that it fully breaks down to.
-        [sliceCoordsOfSegmentsInImage] = getCoordsOfAllSegmentsOfAnImage(log=log,
-                                                                        dimsOfPrimarySegment=cnn3d.pathways[0].getShapeOfInput("test")[2:],
-                                                                        strideOfSegmentsPerDimInVoxels=strideOfImagePartsPerDimensionInVoxels,
-                                                                        batch_size = batch_size,
-                                                                        channelsOfImageNpArray = imageChannels,#chans,niiDims
-                                                                        roiMask = roiMask
-                                                                        )
+        [sliceCoordsOfSegmentsInImage] = getCoordsOfAllSegmentsOfAnImage(log,
+                                                    cnn3d.pathways[0].getShapeOfInput("test")[2:], # dimsOfPrimarySegment
+                                                    strideOfImagePartsPerDimensionInVoxels,
+                                                    batchsize,
+                                                    imageChannels,
+                                                    roiMask )
+        
         log.print3("Starting to segment each image-part by calling the cnn.cnnTestModel(i). This part takes a few mins per volume...")
         
-        
-        totalNumberOfImagePartsToProcessForThisImage = len(sliceCoordsOfSegmentsInImage)
-        log.print3("Total number of Segments to process:"+str(totalNumberOfImagePartsToProcessForThisImage))
+        num_segments_for_case = len(sliceCoordsOfSegmentsInImage)
+        log.print3("Total number of Segments to process:"+str(num_segments_for_case))
         
         imagePartOfConstructedProbMap_i = 0
         imagePartOfConstructedFeatureMaps_i = 0
-        number_of_batches = totalNumberOfImagePartsToProcessForThisImage//batch_size
+        num_batches = num_segments_for_case//batchsize
         extractTimePerSubject = 0; loadingTimePerSubject = 0; fwdPassTimePerSubject = 0
-        for batch_i in range(number_of_batches) : #batch_size = how many image parts in one batch. Has to be the same with the batch_size it was created with. This is no problem for testing. Could do all at once, or just 1 image part at time.
+        for batch_i in range(num_batches) :
             
-            printProgressStep = max(1, number_of_batches//5)
-            if batch_i%printProgressStep == 0:
-                log.print3("Processed "+str(batch_i*batch_size)+"/"+str(number_of_batches*batch_size)+" Segments.")
+            print_progress_step = max(1, num_batches//5)
+            if batch_i == 0 or ((batch_i+1) % print_progress_step) == 0 or (batch_i+1) == num_batches :
+                log.print3("Processed "+str((batch_i+1)*batchsize)+"/"+str(num_segments_for_case)+" segments.")
                 
             # Extract the data for the segments of this batch. ( I could modularize extractDataOfASegmentFromImagesUsingSampledSliceCoords() of training and use it here as well. )
             start_extract_time = time.time()
-            sliceCoordsOfSegmentsInBatch = sliceCoordsOfSegmentsInImage[ batch_i*batch_size : (batch_i+1)*batch_size ]
-            [channsOfSegmentsPerPath] = extractDataOfSegmentsUsingSampledSliceCoords(cnn3d=cnn3d,
-                                                                                    sliceCoordsOfSegmentsToExtract=sliceCoordsOfSegmentsInBatch,
-                                                                                    channelsOfImageNpArray=imageChannels,#chans,niiDims
-                                                                                    channelsOfSubsampledImageNpArray=allSubsampledChannelsOfPatientInNpArray,
-                                                                                    recFieldCnn=recFieldCnn
-                                                                                    )
+            
+            sliceCoordsOfSegmentsInBatch = sliceCoordsOfSegmentsInImage[ batch_i*batchsize : (batch_i+1)*batchsize ]
+            [channsOfSegmentsPerPath] = extractSegmentsGivenSliceCoords(cnn3d,
+                                                                        sliceCoordsOfSegmentsInBatch,
+                                                                        imageChannels,
+                                                                        recFieldCnn )
             end_extract_time = time.time()
             extractTimePerSubject += end_extract_time - start_extract_time
             
@@ -206,7 +190,7 @@ def performInferenceOnWholeVolumes(
             
             #~~~~~~~~~~~~~~~~CONSTRUCT THE PREDICTED PROBABILITY MAPS~~~~~~~~~~~~~~
             #From the results of this batch, create the prediction image by putting the predictions to the correct place in the image.
-            for imagePart_in_this_batch_i in range(batch_size) :
+            for imagePart_in_this_batch_i in range(batchsize) :
                 #Now put the label-cube in the new-label-segmentation-image, at the correct position. 
                 #The very first label goes not in index 0,0,0 but half-patch further away! At the position of the central voxel of the top-left patch!
                 sliceCoordsOfThisSegment = sliceCoordsOfSegmentsInImage[imagePartOfConstructedProbMap_i]
@@ -282,7 +266,7 @@ def performInferenceOnWholeVolumes(
                             centralVoxelsOfAllFmsToBeVisualisedForWholeBatch = centralVoxelsOfAllFmsInLayer
                             
                         #----For every image part within this batch, reconstruct the corresponding part of the feature maps of the layer we are currently visualising in this loop.
-                        for imagePart_in_this_batch_i in range(batch_size) :
+                        for imagePart_in_this_batch_i in range(batchsize) :
                             #Now put the label-cube in the new-label-segmentation-image, at the correct position. 
                             #The very first label goes not in index 0,0,0 but half-patch further away! At the position of the central voxel of the top-left patch!
                             sliceCoordsOfThisSegment = sliceCoordsOfSegmentsInImage[imagePartOfConstructedFeatureMaps_i + imagePart_in_this_batch_i]
@@ -297,14 +281,14 @@ def performInferenceOnWholeVolumes(
                         
                         indexOfTheLayerInTheReturnedListByTheBatchTraining += 1
                         
-                imagePartOfConstructedFeatureMaps_i += batch_size #all the image parts before this were reconstructed for all layers and feature maps. Next batch-iteration should start from this 
-
+                imagePartOfConstructedFeatureMaps_i += batchsize #all the image parts before this were reconstructed for all layers and feature maps. Next batch-iteration should start from this 
+                
             #~~~~~~~~~~~~~~~~~~FINISHED CONSTRUCTING THE FEATURE MAPS FOR VISUALISATION~~~~~~~~~~
         
-        log.print3("TIMING: Segmentation of this subject: [Extracting:] "+ str(extractTimePerSubject) +\
-                                                            " [Loading:] " + str(loadingTimePerSubject) +\
-                                                            " [ForwardPass:] " + str(fwdPassTimePerSubject) +\
-                                                            " [Total:] " + str(extractTimePerSubject+loadingTimePerSubject+fwdPassTimePerSubject) + "(s)")
+        log.print3("TIMING: Segmentation of subject: [Extracting:] {0:.2f}".format(extractTimePerSubject) +\
+                                                    " [Loading:] {0:.2f}".format(loadingTimePerSubject) +\
+                                                    " [ForwardPass:] {0:.2f}".format(fwdPassTimePerSubject) +\
+                                                    " [Total:] {0:.2f}".format(extractTimePerSubject+loadingTimePerSubject+fwdPassTimePerSubject) + " secs.")
         
         # ================ SAVE PREDICTIONS =====================
         #== saving predicted segmentations ==
@@ -315,36 +299,34 @@ def performInferenceOnWholeVolumes(
         if isinstance(roiMask, (np.ndarray)) : #If roiMask was given:
             unpaddedRoiMaskIfGivenElse1 = roiMask if not padInputImagesBool else unpadCnnOutputs(roiMask, tupleOfPaddingPerAxesLeftRight)
             
-        if savePredictionImagesSegmentationAndProbMapsList[0] == True : #save predicted segmentation
-            npDtypeForPredictedImage = np.dtype(np.int16)
-            suffixToAdd = "_Segm"
+        if savePredictedSegmAndProbsDict["segm"] == True : #save predicted segmentation
+            suffixToAdd = suffixForSegmAndProbsDict["segm"]
             #Save the image. Pass the filename paths of the normal image so that I can dublicate the header info, eg RAS transformation.
             unpaddedPredSegmentationWithinRoi = unpaddedPredSegmentation * unpaddedRoiMaskIfGivenElse1
             savePredImgToNiiWithOriginalHdr( unpaddedPredSegmentationWithinRoi,
-                                            listOfNamesToGiveToPredictionsIfSavingResults,
+                                            namesForSavingSegmAndProbs,
                                             listOfFilepathsToEachChannelOfEachPatient,
                                             image_i,
                                             suffixToAdd,
-                                            npDtypeForPredictedImage,
-                                            log
-                                            )
+                                            np.dtype(np.int16),
+                                            log )
+            
         #== saving probability maps ==
         for class_i in range(0, NUMBER_OF_CLASSES) :
-            if (len(savePredictionImagesSegmentationAndProbMapsList[1]) >= class_i + 1) and (savePredictionImagesSegmentationAndProbMapsList[1][class_i] == True) : #save predicted probMap for class
-                npDtypeForPredictedImage = np.dtype(np.float32)
-                suffixToAdd = "_ProbMapClass" + str(class_i)
+            if (len(savePredictedSegmAndProbsDict["prob"]) >= class_i + 1) and (savePredictedSegmAndProbsDict["prob"][class_i] == True) : #save predicted probMap for class
+                suffixToAdd = suffixForSegmAndProbsDict["prob"] + str(class_i)
                 #Save the image. Pass the filename paths of the normal image so that I can dublicate the header info, eg RAS transformation.
                 predProbMapClassI = predProbMapsPerClass[class_i,:,:,:]
                 unpaddedPredProbMapClassI = predProbMapClassI if not padInputImagesBool else unpadCnnOutputs(predProbMapClassI, tupleOfPaddingPerAxesLeftRight)
                 unpaddedPredProbMapClassIWithinRoi = unpaddedPredProbMapClassI * unpaddedRoiMaskIfGivenElse1
                 savePredImgToNiiWithOriginalHdr( unpaddedPredProbMapClassIWithinRoi,
-                                                listOfNamesToGiveToPredictionsIfSavingResults,
+                                                namesForSavingSegmAndProbs,
                                                 listOfFilepathsToEachChannelOfEachPatient,
                                                 image_i,
                                                 suffixToAdd,
-                                                npDtypeForPredictedImage,
-                                                log
-                                                )
+                                                np.dtype(np.float32),
+                                                log )
+                
         #== saving feature maps ==
         if saveIndividualFmImagesForVisualisation :
             currentIndexInTheMultidimensionalImageWithAllToBeVisualisedFmsArray = 0
@@ -360,14 +342,14 @@ def performInferenceOnWholeVolumes(
                                 fmToSave = multidimensionalImageWithAllToBeVisualisedFmsArray[currentIndexInTheMultidimensionalImageWithAllToBeVisualisedFmsArray]
                                 unpaddedFmToSave = fmToSave if not padInputImagesBool else unpadCnnOutputs(fmToSave, tupleOfPaddingPerAxesLeftRight)
                                 saveFmImgToNiiWithOriginalHdr(  unpaddedFmToSave,
-                                                                listOfNamesToGiveToFmVisualisationsIfSaving,
+                                                                namesForSavingFms,
                                                                 listOfFilepathsToEachChannelOfEachPatient,
                                                                 image_i,
                                                                 pathway_i,
                                                                 layer_i,
                                                                 fmActualNumber,
-                                                                log
-                                                                )
+                                                                log )
+                                
                                 currentIndexInTheMultidimensionalImageWithAllToBeVisualisedFmsArray += 1
         if saveMultidimensionalImageWithAllFms :
             multidimensionalImageWithAllToBeVisualisedFmsArrayWith4thDimAsFms =  np.transpose(multidimensionalImageWithAllToBeVisualisedFmsArray, (1,2,3, 0) )
@@ -375,7 +357,7 @@ def performInferenceOnWholeVolumes(
                 unpadCnnOutputs(multidimensionalImageWithAllToBeVisualisedFmsArrayWith4thDimAsFms, tupleOfPaddingPerAxesLeftRight)
             #Save a multidimensional Nii image. 3D Image, with the 4th dimension being all the Fms...
             save4DImgWithAllFmsToNiiWithOriginalHdr( unpaddedMultidimensionalImageWithAllToBeVisualisedFmsArrayWith4thDimAsFms,
-                                                    listOfNamesToGiveToFmVisualisationsIfSaving,
+                                                    namesForSavingFms,
                                                     listOfFilepathsToEachChannelOfEachPatient,
                                                     image_i,
                                                     log )
@@ -422,11 +404,12 @@ def performInferenceOnWholeVolumes(
         printExplanationsAboutDice(log)
         
     end_time = time.time()
-    log.print3("TIMING: "+validation_or_testing_str+" process took time: "+str(end_time-start_time)+"(s)")
+    log.print3("TIMING: "+validation_or_testing_str+" process lasted: {0:.2f}".format(end_time-start_time)+" secs.")
     
     log.print3("###########################################################################################################")
     log.print3("############################# Finished full Segmentation of " + str(validation_or_testing_str) + " subjects ##########################")
     log.print3("###########################################################################################################")
+    return 0
 
 
 def calculateDiceCoefficient(predictedBinaryLabels, groundTruthBinaryLabels) :

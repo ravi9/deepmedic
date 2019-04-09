@@ -33,6 +33,9 @@ class TestConfig(Config):
     
     SAVE_SEGM = "saveSegmentation" # Default True
     SAVE_PROBMAPS_PER_CLASS = "saveProbMapsForEachClass" # Default True
+    SUFFIX_SEGM_PROB = "suffixForSegmAndProbsDict"
+    
+    BATCHSIZE = "batchsize"
     
     #optionals, cause default is False.
     SAVE_INDIV_FMS = "saveIndividualFms"

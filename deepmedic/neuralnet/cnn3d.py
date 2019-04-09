@@ -63,8 +63,6 @@ class Cnn3d(object):
         
         #=====================================
         self.recFieldCnn = ""
-                
-        self.batchSize = {"train": "", "val": "", "test": ""}
         
         # self.patchesToTrainPerImagePart = ""
         self.nkerns = ""  # number of feature maps.
@@ -303,11 +301,6 @@ class Cnn3d(object):
                         imagePartDimensionsValidation,
                         imagePartDimensionsTesting,
                         
-                        #=== Batch Sizes ===
-                        batch_size_train,
-                        batch_size_validation,
-                        batch_size_testing,
-                        
                         #=== Others ===
                         # Dropout
                         dropoutRatesForAllPathways,  # list of sublists, one for each pathway. Each either empty or full with the dropout rates of all the layers in the path.
@@ -338,8 +331,6 @@ class Cnn3d(object):
         self.indicesOfLowerRankLayersPerPathway = indicesOfLowerRankLayersPerPathway
         # pooling?
 
-        # == Batch Sizes ==
-        self.batchSize = {"train": batch_size_train, "val": batch_size_validation, "test": batch_size_testing}
         # == Others ==
         self.dropoutRatesForAllPathways = dropoutRatesForAllPathways
         
@@ -348,7 +339,7 @@ class Cnn3d(object):
         self.recFieldCnn = calcRecFieldFromKernDimListPerLayerWhenStrides1(kernelDimensions)
         
         #==============================
-        rng = np.random.RandomState(23455)
+        rng = np.random.RandomState(seed=None)
         
         ######################
         # BUILD ACTUAL MODEL #
@@ -372,9 +363,9 @@ class Cnn3d(object):
         inputToPathwayTrain = self._inp_x['train']['x']
         inputToPathwayVal = self._inp_x['val']['x']
         inputToPathwayTest = self._inp_x['test']['x']
-        inputToPathwayShapeTrain = [self.batchSize["train"], numberOfImageChannelsPath1] + imagePartDimensionsTraining
-        inputToPathwayShapeVal = [self.batchSize["val"], numberOfImageChannelsPath1] + imagePartDimensionsValidation
-        inputToPathwayShapeTest = [self.batchSize["test"], numberOfImageChannelsPath1] + imagePartDimensionsTesting
+        inputToPathwayShapeTrain = [None, numberOfImageChannelsPath1] + imagePartDimensionsTraining
+        inputToPathwayShapeVal = [None, numberOfImageChannelsPath1] + imagePartDimensionsValidation
+        inputToPathwayShapeTest = [None, numberOfImageChannelsPath1] + imagePartDimensionsTesting
         
         thisPathWayNKerns = nkerns
         thisPathWayKernelDimensions = kernelDimensions
@@ -387,6 +378,7 @@ class Cnn3d(object):
         thisPathwayActivFuncPerLayer[0] = "linear" if thisPathwayType != pt.FC else activationFunc  # To not apply activation on raw input. -1 is linear activation.
         
         thisPathway.makeLayersOfThisPathwayAndReturnDimensionsOfOutputFM(log,
+                                                                         rng,
                                                                          inputToPathwayTrain,
                                                                          inputToPathwayVal,
                                                                          inputToPathwayTest,
@@ -409,8 +401,6 @@ class Cnn3d(object):
                                                                          ranksOfLowerRankLayersForEachPathway[thisPathwayType],
                                                                          indicesOfLayersToConnectResidualsInOutput[thisPathwayType]
                                                                          )
-        # Skip connections to end of pathway.
-        thisPathway.makeMultiscaleConnectionsForLayerType(convLayersToConnectToFirstFcForMultiscaleFromAllLayerTypes[thisPathwayType])
         
         [dimsOfOutputFrom1stPathwayTrain, dimsOfOutputFrom1stPathwayVal, dimsOfOutputFrom1stPathwayTest] = thisPathway.getShapeOfOutput()
         
@@ -434,11 +424,12 @@ class Cnn3d(object):
             thisPathwayActivFuncPerLayer = [activationFunc] * thisPathwayNumOfLayers
             thisPathwayActivFuncPerLayer[0] = "linear" if thisPathwayType != pt.FC else activationFunc  # To not apply activation on raw input. -1 is linear activation.
             
-            inputToPathwayShapeTrain = [self.batchSize["train"], numberOfImageChannelsPath2] + thisPathway.calcInputRczDimsToProduceOutputFmsOfCompatibleDims(thisPathWayKernelDimensions, dimsOfOutputFrom1stPathwayTrain);
-            inputToPathwayShapeVal = [self.batchSize["val"], numberOfImageChannelsPath2] + thisPathway.calcInputRczDimsToProduceOutputFmsOfCompatibleDims(thisPathWayKernelDimensions, dimsOfOutputFrom1stPathwayVal)
-            inputToPathwayShapeTest = [self.batchSize["test"], numberOfImageChannelsPath2] + thisPathway.calcInputRczDimsToProduceOutputFmsOfCompatibleDims(thisPathWayKernelDimensions, dimsOfOutputFrom1stPathwayTest)
+            inputToPathwayShapeTrain = [None, numberOfImageChannelsPath2] + thisPathway.calcInputRczDimsToProduceOutputFmsOfCompatibleDims(thisPathWayKernelDimensions, dimsOfOutputFrom1stPathwayTrain);
+            inputToPathwayShapeVal = [None, numberOfImageChannelsPath2] + thisPathway.calcInputRczDimsToProduceOutputFmsOfCompatibleDims(thisPathWayKernelDimensions, dimsOfOutputFrom1stPathwayVal)
+            inputToPathwayShapeTest = [None, numberOfImageChannelsPath2] + thisPathway.calcInputRczDimsToProduceOutputFmsOfCompatibleDims(thisPathWayKernelDimensions, dimsOfOutputFrom1stPathwayTest)
             
             thisPathway.makeLayersOfThisPathwayAndReturnDimensionsOfOutputFM(log,
+                                                                     rng,
                                                                      inputToPathwayTrain,
                                                                      inputToPathwayVal,
                                                                      inputToPathwayTest,
@@ -460,8 +451,7 @@ class Cnn3d(object):
                                                                      ranksOfLowerRankLayersForEachPathway[thisPathwayType],
                                                                      indicesOfLayersToConnectResidualsInOutput[thisPathwayType]
                                                                      )
-            # Skip connections to end of pathway.
-            thisPathway.makeMultiscaleConnectionsForLayerType(convLayersToConnectToFirstFcForMultiscaleFromAllLayerTypes[thisPathwayType])
+            
             
             # this creates essentially the "upsampling layer"
             thisPathway.upsampleOutputToNormalRes(upsamplingScheme="repeat",
@@ -480,7 +470,7 @@ class Cnn3d(object):
             inputToFirstFcLayerVal = tf.concat([inputToFirstFcLayerVal, outputNormResOfPathVal], axis=1) if path_i != 0 else outputNormResOfPathVal
             inputToFirstFcLayerTest = tf.concat([inputToFirstFcLayerTest, outputNormResOfPathTest], axis=1) if path_i != 0 else outputNormResOfPathTest
             numberOfFmsOfInputToFirstFcLayer += dimsOfOutputNormResOfPathTrain[1]
-            
+        
         #======================= Make the Fully Connected Layers =======================
         thisPathway = FcPathway()
         self.pathways.append(thisPathway)
@@ -498,9 +488,9 @@ class Cnn3d(object):
         inputToPathwayTrain = padImageWithMirroring(inputToFirstFcLayerTrain, voxelsToPadPerDim)
         inputToPathwayVal = padImageWithMirroring(inputToFirstFcLayerVal, voxelsToPadPerDim)
         inputToPathwayTest = padImageWithMirroring(inputToFirstFcLayerTest, voxelsToPadPerDim)
-        inputToPathwayShapeTrain = [self.batchSize["train"], numberOfFmsOfInputToFirstFcLayer] + dimsOfOutputFrom1stPathwayTrain[2:5]
-        inputToPathwayShapeVal = [self.batchSize["val"], numberOfFmsOfInputToFirstFcLayer] + dimsOfOutputFrom1stPathwayVal[2:5]
-        inputToPathwayShapeTest = [self.batchSize["test"], numberOfFmsOfInputToFirstFcLayer] + dimsOfOutputFrom1stPathwayTest[2:5]
+        inputToPathwayShapeTrain = [None, numberOfFmsOfInputToFirstFcLayer] + dimsOfOutputFrom1stPathwayTrain[2:5]
+        inputToPathwayShapeVal = [None, numberOfFmsOfInputToFirstFcLayer] + dimsOfOutputFrom1stPathwayVal[2:5]
+        inputToPathwayShapeTest = [None, numberOfFmsOfInputToFirstFcLayer] + dimsOfOutputFrom1stPathwayTest[2:5]
         for rcz_i in range(3) : 
             inputToPathwayShapeTrain[2+rcz_i] += voxelsToPadPerDim[rcz_i]
             inputToPathwayShapeVal[2+rcz_i] += voxelsToPadPerDim[rcz_i]
@@ -517,6 +507,7 @@ class Cnn3d(object):
         thisPathwayActivFuncPerLayer[0] = "linear" if thisPathwayType != pt.FC else activationFunc  # To not apply activation on raw input. -1 is linear activation.
         
         thisPathway.makeLayersOfThisPathwayAndReturnDimensionsOfOutputFM(log,
+                                                                         rng,
                                                                          inputToPathwayTrain,
                                                                          inputToPathwayVal,
                                                                          inputToPathwayTest,
@@ -537,7 +528,7 @@ class Cnn3d(object):
                                                                          
                                                                          indicesOfLowerRankLayersPerPathway[thisPathwayType],
                                                                          ranksOfLowerRankLayersForEachPathway[thisPathwayType],
-                                                                         indicesOfLayersToConnectResidualsInOutput[thisPathwayType],
+                                                                         indicesOfLayersToConnectResidualsInOutput[thisPathwayType]
                                                                          )
         
         # =========== Make the final Target Layer (softmax, regression, whatever) ==========
