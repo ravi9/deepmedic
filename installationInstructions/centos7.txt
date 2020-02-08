@@ -1,0 +1,79 @@
+## installing CUDA and NVIDIA drivers. ref: http://www.advancedclustering.com/act_kb/installing-nvidia-drivers-rhel-centos-7/
+sudo yum -y install kernel-devel
+sudo yum -y install epel-release
+sudo yum -y install dkms
+
+# install the latest driver for the card from NVIDIA's website https://www.nvidia.com/Download/index.aspx?lang=en-us
+
+# Edit /etc/default/grub. Append the following  to "GRUB_CMDLINE_LINUX"
+rd.driver.blacklist=nouveau nouveau.modeset=0
+
+# run this command
+grub2-mkconfig -o /boot/grub2/grub.cfg
+
+# Edit/Create /etc/modprobe.d/nvidia-disable-nouveau.conf and append:
+blacklist nouveau
+options nouveau modeset=0
+
+# TF does not support CUDA 10 on Conda, yet - custom build is needed, so we use CUDA 9
+#wget https://developer.nvidia.com/compute/cuda/10.0/Prod/local_installers/cuda_10.0.130_410.48_linux
+#sudo sh cuda_10.0.130_410.48_linux # accept, yes 
+
+wget https://developer.nvidia.com/compute/cuda/9.0/Prod/local_installers/cuda_9.0.176_384.81_linux-run
+
+IMPORTANT: Do NOT install the drivers when asked.
+sudo sh cuda_9.0.176_384.81_linux-run
+
+EULA appears. Click space to read, or hit "q" to exit the text. Type "accept" and hit ENTER.
+!! At the "Install NVIDIA Accelerated Graphics Driver for <OS> <Driver Version>?" prompt, answer "n" here !!
+
+Next prompts are:
+   - Install the CUDA 9.0 Toolkit?
+Enter y.
+
+    - Enter Toolkit Location                                                                                                                                       
+    -  [ default is /usr/local/cuda-9.0 ]:
+Hit ENTER to accept the default.
+
+    - Do you want to install a symbolic link at /usr/local/cuda?
+Enter y.
+
+    - Install the CUDA 9.0 Samples?
+Enter y if you want the samples and utilities.
+
+    - Enter CUDA Samples Location                                                                                                                                  
+      [ default is /home/<username> ]
+If multiple users will need access, we recommend changing the default location.
+
+Installation will begin. A logfile will be generated in /tmp/cuda_install_XXXXX.log
+
+# Download appropriate cudnn and install it in the cuda folder: cannot be automated, NVIDIA account required
+# https://developer.nvidia.com/rdp/form/cudnn-download-survey
+# You can create an account from the above link (email validation required).
+
+# install anaconda
+cd downloads
+wget https://repo.anaconda.com/archive/Anaconda3-5.3.1-Linux-x86_64.sh
+chmod +x Anaconda3-5.3.1-Linux-x86_64.sh
+sudo ./Anaconda3-5.3.1-Linux-x86_64.sh -p /home/anaconda3/ -b
+export PATH=/usr/local/cuda-9.0/bin:/home/anaconda3/bin/:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64/:$LD_LIBRARY_PATH
+
+# update package managers
+sudo conda update conda
+pip install --upgrade pip
+
+# create the virtual environment for TF installation
+conda create -n ve_tf_dmtf python=3.5.6 anaconda # no TF support for 3.5+
+source activate ve_tf_dmtf
+pip install --upgrade tensorflow-gpu # does not work on CUDA 10
+
+# get DM up and running
+cd ~; mkdir projects; cd projects
+git clone https://github.com/CBICA/deepmedic.git
+cd deepmedic
+pip install https://www.parallelpython.com/downloads/pp/pp-1.6.4.4.zip # PP does not support Python3, yet
+pip install .
+
+# actually train a DM model
+./deepMedicRun -model ./examples/configFiles/deepMedic/model/modelConfig.cfg -train ./examples/configFiles/deepMedic/train/trainConfig.cfg -dev cuda
