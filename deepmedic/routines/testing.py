@@ -318,14 +318,32 @@ def predict_whole_volume_by_tiling_ov(log, sessionTf, cnn3d,
                                    sub_id, fwk ):
     # One of the main routines. Segment whole volume tile-by-tile.
 
+    ov_device = "CPU"
+    #ov_device = "MULTI:CPU,GPU"
+
     if fwk == 'ov-fp32' :
         #### Load FP32 OpenVINO model
-        ov_model_dir = 'examples/tcga/savedmodels/fp32/'
+        ov_model_dir = 'examples/tcga/savedmodels/fp32-ext/'
         modelname = 'deepmedic-4-ov.model.ckpt'
     elif fwk == 'ov-i8':
         #### Load INT8 OpenVINO model
-        ov_model_dir = 'int8_openvino_model/'
+        ov_model_dir = 'int8_openvino_model-ext/'
         modelname = 'deepmedic-4-ov.model.ckpt.int8'
+    elif fwk == 'ov-igpu-fp32':
+        #### Load INT8 OpenVINO model
+        ov_model_dir = 'examples/tcga/savedmodels/fp32-ext/'
+        modelname = 'deepmedic-4-ov.model.ckpt'
+        ov_device = "GPU"
+    elif fwk == 'ov-igpu-fp16':
+        #### Load INT8 OpenVINO model
+        ov_model_dir = 'examples/tcga/savedmodels/fp16-ext/'
+        modelname = 'deepmedic-4-ov.model.ckpt'
+        ov_device = "GPU"
+    elif fwk == 'ov-igpu-i8':
+        #### Load INT8 OpenVINO model
+        ov_model_dir = 'int8_openvino_model-ext/'
+        modelname = 'deepmedic-4-ov.model.ckpt.int8'
+        ov_device = "GPU"
     else:
         exit()
 
@@ -335,7 +353,7 @@ def predict_whole_volume_by_tiling_ov(log, sessionTf, cnn3d,
     # Load network to the plugin
     ie = IECore()
     net = ie.read_network(model=model_xml)
-    exec_net = ie.load_network(network=net, device_name="CPU")
+    exec_net = ie.load_network(network=net, device_name=ov_device)
     del net
 
     # Receptive field is list [size-x, size-y, size-z]. -1 to exclude the central voxel.
@@ -672,9 +690,9 @@ def report_metrics_for_subject(log, metrics_per_subj_per_c, subj_i, na_pattern, 
            " DICE2=" + strListFl4fNA(metrics_per_subj_per_c['dice2'][subj_i], na_pattern) +
            " DICE3=" + strListFl4fNA(metrics_per_subj_per_c['dice3'][subj_i], na_pattern))
     log_str = (f"{fwk}, {sub_id},"
-               f"DICE1,{metrics_per_subj_per_c['dice1'][subj_i][0]:.6f},{metrics_per_subj_per_c['dice1'][subj_i][0]:.6f},"
-               f"DICE2,{metrics_per_subj_per_c['dice2'][subj_i][0]:.6f},{metrics_per_subj_per_c['dice2'][subj_i][0]:.6f},"
-               f"DICE3,{metrics_per_subj_per_c['dice3'][subj_i][0]:.6f},{metrics_per_subj_per_c['dice3'][subj_i][0]:.6f},")
+               f"DICE1,{metrics_per_subj_per_c['dice1'][subj_i][0]:.6f},{metrics_per_subj_per_c['dice1'][subj_i][1]:.6f},"
+               f"DICE2,{metrics_per_subj_per_c['dice2'][subj_i][0]:.6f},{metrics_per_subj_per_c['dice2'][subj_i][1]:.6f},"
+               f"DICE3,{metrics_per_subj_per_c['dice3'][subj_i][0]:.6f},{metrics_per_subj_per_c['dice3'][subj_i][1]:.6f},")
 
     with open(f"metrics_dice_{fwk}.csv", "a") as f:
         f.write(f"{log_str}\n")
