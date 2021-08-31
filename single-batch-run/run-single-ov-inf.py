@@ -48,16 +48,24 @@ def main():
     with open(gt_lbl_ov_to_load, 'rb') as f:
         gt_lbl_of_tiles_per_path = pickle.load(f)
 
-    #### Init OpenVINO model
-    ov_model_dir = '../examples/tcga/savedmodels/fp32-ext/'
     modelname = 'deepmedic-4-ov.model.ckpt'
+
+    #### Init OpenVINO model - no extension
+    ov_model_dir = '../examples/tcga/savedmodels/fp32/'
     model_xml = f'{ov_model_dir}/{modelname}.xml'
 
-    ov_device = "CPU"
-    infer(feeds_dict_ov, gt_lbl_of_tiles_per_path, model_xml, ov_device)
+    print ("Evaluating FP32 model without MO Extension")
+    for ov_device in {"CPU"}:
+        infer(feeds_dict_ov, gt_lbl_of_tiles_per_path, model_xml, ov_device)
 
-    ov_device = "GPU"
-    infer(feeds_dict_ov, gt_lbl_of_tiles_per_path, model_xml, ov_device)
+    #### Init OpenVINO model - with extension
+    ov_model_dir = '../examples/tcga/savedmodels/fp32-ext/'
+    model_xml = f'{ov_model_dir}/{modelname}.xml'
+
+    print ("Evaluating FP32 model with MO Extension")
+    for ov_device in {"CPU", "GPU"}:
+        infer(feeds_dict_ov, gt_lbl_of_tiles_per_path, model_xml, ov_device)
+
 
 
 if __name__ == "__main__":
