@@ -6,6 +6,9 @@
 # it under the terms of the BSD license. See the accompanying LICENSE file
 # or read the terms at https://opensource.org/licenses/BSD-3-Clause.
 
+### update history:
+# 2021/9/10: update for cbica use so it will not error out when CUDA_VISIBLE_DEVICES becomes a UUID
+
 from __future__ import absolute_import, print_function, division
 import sys
 import os
@@ -35,7 +38,9 @@ OPT_LOAD = "-load"
 
 OPT_DEVICE = "-dev"
 ARG_CPU_PROC = "cpu"
-ARG_GPU_PROC = "cuda"
+ARG_GPU_PROC = "gpu"
+ARG_GPU_PROC_BACKUP = "cuda"
+
 DEF_DEV_PROC = ARG_CPU_PROC
 
 OPT_RESET = "-resetopt"
@@ -47,7 +52,7 @@ def str_is_int(s):
         return True
     except ValueError:
         return False
-    
+
 def setup_arg_parser() :
     parser = argparse.ArgumentParser( prog='DeepMedic', formatter_class=argparse.RawTextHelpFormatter,
     description="\nThis software allows creation and supervised training of 3D, multi-scale CNN models for segmentation of structures in biomedical NIFTI volumes.\n"+\
@@ -70,7 +75,6 @@ def setup_arg_parser() :
                                                                     "This option must follow a ["+OPT_TRAIN+"] or ["+OPT_TEST+"] option.\n"+\
                                                                     "If given, this option will override any \"model\" parameters given in the [TRAIN_CFG] or [TEST_CFG] files.")
     parser.add_argument(OPT_DEVICE, default = DEF_DEV_PROC, dest='device', type=str,  help="Specify the device to run the process on. Values: [" + ARG_CPU_PROC + "] or [" + ARG_GPU_PROC + "] (default = " + DEF_DEV_PROC + ").\n"+\
-                                                                    "In the case of multiple GPUs, specify a particular GPU device with a number, in the format: " + OPT_DEVICE + " " + ARG_GPU_PROC + "0 \n"+\
                                                                     "NOTE: For GPU processing, CUDA libraries must be first added in your environment's PATH and LD_LIBRARY_PATH. See accompanying documentation.")
     parser.add_argument(OPT_RESET, dest='reset_trainer', action='store_true', help="Use optionally with a ["+OPT_TRAIN+"] command. Does not take an argument.\n"+\
                                                                     "Usage: ./deepMedicRun " + OPT_MODEL + " /path/to/model/config "+OPT_TRAIN+" /path/to/train/config "+OPT_RESET+" ...etc...\n"+\
@@ -81,28 +85,25 @@ def setup_arg_parser() :
     return parser
 
 
+
+
 def check_dev_passed_correctly(devArg) :
     if devArg == ARG_CPU_PROC: return
-    if devArg == ARG_GPU_PROC: return
-    if devArg.startswith(ARG_GPU_PROC) and str_is_int(devArg[ len(ARG_GPU_PROC) : ]) : return
-    
-    print(  "ERROR: Value for the [" + OPT_DEVICE + "] option was not specified correctly. Specify the device to run the process on. \n"+\
-            "\tValues: [" + ARG_CPU_PROC + "] or [" + ARG_GPU_PROC + "] (Default = " + DEF_DEV_PROC + ").\n"+\
-            "\tIn the case of multiple GPUs, specify a particular GPU device with a number, in the format: " + ARG_GPU_PROC + "2. Exiting.")
+    elif devArg == ARG_GPU_PROC: return
+    elif devArg.startswith(ARG_GPU_PROC_BACKUP): return
+    else:
+        print ("ERROR: value for  the [" + OPT_DEVICE + "] option was not specified correctly. Specify values: [" + ARG_CPU_PROC + "] or [" + ARG_GPU_PROC + "]") 
+ 
     exit(1)
     
     
 def set_environment(dev_string):
     # Setup cpu / gpu devices.
-    sess_device = None
     if dev_string == ARG_CPU_PROC:
         os.environ["CUDA_VISIBLE_DEVICES"] = ""
         sess_device = "/CPU:0"
-    elif dev_string == ARG_GPU_PROC:
+    else:
         sess_device = None # With None, TF will get all cuda devices and assign to the first.
-    if dev_string.startswith(ARG_GPU_PROC) and str_is_int( dev_string[ len(ARG_GPU_PROC): ] ):
-        os.environ["CUDA_VISIBLE_DEVICES"] = dev_string[ len(ARG_GPU_PROC) : ]
-        sess_device = "/device:GPU:0"
         
     return (sess_device)
 
