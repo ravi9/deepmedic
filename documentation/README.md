@@ -3,6 +3,11 @@ DeepMedic
 
 ### News
 
+05 Oct 2021 (v0.7.1.1):
+* CBICA update to accomodate change in CUDA_VISIBLE_DEVICES variable
+* -dev option now takes either cpu or gpu
+* No algorithm change
+
 11 Feb 2019 (v0.7.1):
 * Multiprocessing changed from pp to python's builtin module.
 * Default suggested python switched to python3.
