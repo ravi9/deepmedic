@@ -1,0 +1,2 @@
+model_checkpoint_path: "deepmedic-4-ov.model.ckpt"
+all_model_checkpoint_paths: "deepmedic-4-ov.model.ckpt"

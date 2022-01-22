@@ -1,0 +1,1427 @@
+<?xml version="1.0" ?>
+<mapping>
+	<map>
+		<framework name="net/strided_slice_92/stack:0" out_port_id="net/strided_slice_92/stack:0"/>
+		<IR id="640" name="net/strided_slice_92/stack83912283" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/Conv3D_14:0" out_port_id="net/Conv3D_14:0"/>
+		<IR id="1151" name="net/Conv3D_14/output_transpose" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/transpose_34:0" out_port_id="net/transpose_34:0"/>
+		<IR id="1151" name="net/Conv3D_14/output_transpose" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/transpose_126:0" out_port_id="net/transpose_126:0"/>
+		<IR id="16" name="net/transpose_126103311008" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/Maximum_29/x:0" out_port_id="net/Maximum_29/x:0"/>
+		<IR id="438" name="net/Maximum_29/x65911599" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_88/stack_1:0" out_port_id="net/strided_slice_88/stack_1:0"/>
+		<IR id="610" name="net/strided_slice_88/stack_180811947" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/transpose_5/perm:0" out_port_id="net/transpose_5/perm:0"/>
+		<IR id="1002" name="net/transpose_5/perm53713159" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/add_67:0" out_port_id="net/add_67:0"/>
+		<IR id="1222" name="net/sub_38/Fused_Add_" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/mul_143/y:0" out_port_id="net/mul_143/y:0"/>
+		<IR id="772" name="net/mul_143/y97312199" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/Reshape_116:0" out_port_id="net/Reshape_116:0"/>
+		<IR id="747" name="net/Reshape_116" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_86/stack_2:0" out_port_id="net/strided_slice_86/stack_2:0"/>
+		<IR id="597" name="net/strided_slice_86/stack_279511611" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_86:0" out_port_id="net/strided_slice_86:0"/>
+		<IR id="598" name="net/strided_slice_86" out_port_id="4"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_104/stack_2:0" out_port_id="net/strided_slice_104/stack_2:0"/>
+		<IR id="729" name="net/strided_slice_104/stack_292911464" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/mul_141/y:0" out_port_id="net/mul_141/y:0"/>
+		<IR id="701" name="net/mul_141/y90112865" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/transpose_89/perm:0" out_port_id="net/transpose_89/perm:0"/>
+		<IR id="212" name="net/transpose_89/perm72811044" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/transpose_112:0" out_port_id="net/transpose_112:0"/>
+		<IR id="84" name="net/transpose_11299712676" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/Reshape_114/shape:0" out_port_id="net/Reshape_114/shape:0"/>
+		<IR id="681" name="net/Reshape_114/Cast_1" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="net/mul_17:0" out_port_id="net/mul_17:0"/>
+		<IR id="1068" name="net/mul_16/Fused_Mul_" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/sub_11:0" out_port_id="net/sub_11:0"/>
+		<IR id="1060" name="net/sub_11/sub" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/Reshape:0" out_port_id="net/Reshape:0"/>
+		<IR id="1008" name="net/Reshape53510867" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/add_75:0" out_port_id="net/add_75:0"/>
+		<IR id="339" name="net/add_75" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_104:0" out_port_id="net/strided_slice_104:0"/>
+		<IR id="730" name="net/strided_slice_104" out_port_id="4"/>
+	</map>
+	<map>
+		<framework name="net/transpose_96/perm:0" out_port_id="net/transpose_96/perm:0"/>
+		<IR id="182" name="net/transpose_96/perm74410963" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/mul_164:0" out_port_id="net/mul_164:0"/>
+		<IR id="1324" name="net/mul_164" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/Conv3D_23:0" out_port_id="net/Conv3D_23:0"/>
+		<IR id="1253" name="net/Conv3D_23/output_transpose" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/transpose_55:0" out_port_id="net/transpose_55:0"/>
+		<IR id="1253" name="net/Conv3D_23/output_transpose" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/add_7:0" out_port_id="net/add_7:0"/>
+		<IR id="1018" name="net/sub_2/Fused_Add_" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/add_155:0" out_port_id="net/add_155:0"/>
+		<IR id="1282" name="net/add_155" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/transpose_35:0" out_port_id="net/transpose_35:0"/>
+		<IR id="850" name="net/transpose_3561912409" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_99/stack:0" out_port_id="net/strided_slice_99/stack:0"/>
+		<IR id="691" name="net/strided_slice_99/stack89113204" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_94/stack_1:0" out_port_id="net/strided_slice_94/stack_1:0"/>
+		<IR id="657" name="net/strided_slice_94/stack_185612175" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/transpose_75/perm:0" out_port_id="net/transpose_75/perm:0"/>
+		<IR id="272" name="net/transpose_75/perm69612793" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_110/stack_2:0" out_port_id="net/strided_slice_110/stack_2:0"/>
+		<IR id="770" name="net/strided_slice_110/stack_297112841" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/Maximum_32/x:0" out_port_id="net/Maximum_32/x:0"/>
+		<IR id="472" name="net/Maximum_32/x65810729" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/add_37:0" out_port_id="net/add_37:0"/>
+		<IR id="1120" name="net/sub_20/Fused_Add_" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/Maximum_50:0" out_port_id="net/Maximum_50:0"/>
+		<IR id="1357" name="net/Maximum_50" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/Maximum_17:0" out_port_id="net/Maximum_17:0"/>
+		<IR id="1212" name="net/Maximum_17" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/transpose_84:0" out_port_id="net/transpose_84:0"/>
+		<IR id="210" name="net/transpose_8473012145" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/add_120:0" out_port_id="net/add_120:0"/>
+		<IR id="484" name="net/sub_68/Fused_Add_" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_111/stack_1:0" out_port_id="net/strided_slice_111/stack_1:0"/>
+		<IR id="105" name="net/strided_slice_111/stack_198112721" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/add_105:0" out_port_id="net/add_105:0"/>
+		<IR id="441" name="net/add_105" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_93:0" out_port_id="net/strided_slice_93:0"/>
+		<IR id="653" name="net/strided_slice_93" out_port_id="4"/>
+	</map>
+	<map>
+		<framework name="net/concat_2:0" out_port_id="net/concat_2:0"/>
+		<IR id="1254" name="net/concat_2" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_106/stack:0" out_port_id="net/strided_slice_106/stack:0"/>
+		<IR id="737" name="net/strided_slice_106/stack93711971" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/Tile_6/multiples:0" out_port_id="net/Tile_6/multiples:0"/>
+		<IR id="109" name="net/Tile_6/multiples81610699" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_100:0" out_port_id="net/strided_slice_100:0"/>
+		<IR id="700" name="net/strided_slice_100" out_port_id="4"/>
+	</map>
+	<map>
+		<framework name="net/transpose_117:0" out_port_id="net/transpose_117:0"/>
+		<IR id="1284" name="net/transpose_117" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_97/stack_2:0" out_port_id="net/strided_slice_97/stack_2:0"/>
+		<IR id="676" name="net/strided_slice_97/stack_287512811" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_95/stack_1:0" out_port_id="net/strided_slice_95/stack_1:0"/>
+		<IR id="663" name="net/strided_slice_95/stack_186212301" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_93/stack_2:0" out_port_id="net/strided_slice_93/stack_2:0"/>
+		<IR id="652" name="net/strided_slice_93/stack_285111752" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/sub_35:0" out_port_id="net/sub_35:0"/>
+		<IR id="1196" name="net/sub_35/sub" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/transpose_89:0" out_port_id="net/transpose_89:0"/>
+		<IR id="477" name="net/transpose_89" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/Maximum_26:0" out_port_id="net/Maximum_26:0"/>
+		<IR id="406" name="net/Maximum_26" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/Reshape_113:0" out_port_id="net/Reshape_113:0"/>
+		<IR id="648" name="net/Reshape_113" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/Softmax_2:0" out_port_id="net/Softmax_2:0"/>
+		<IR id="1376" name="net/Softmax_2" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="net/transpose_54:0" out_port_id="net/transpose_54:0"/>
+		<IR id="1249" name="net/transpose_54" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/transpose_124:0" out_port_id="net/transpose_124:0"/>
+		<IR id="1326" name="net/transpose_124" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_89/stack_2:0" out_port_id="net/strided_slice_89/stack_2:0"/>
+		<IR id="621" name="net/strided_slice_89/stack_282012595" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/mul_173:0" out_port_id="net/mul_173:0"/>
+		<IR id="1349" name="net/mul_172/Fused_Mul_" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/Maximum_44:0" out_port_id="net/Maximum_44:0"/>
+		<IR id="1281" name="net/Maximum_44" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/Conv3D_38:0" out_port_id="net/Conv3D_38:0"/>
+		<IR id="481" name="net/Conv3D_38/output_transpose" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/transpose_90:0" out_port_id="net/transpose_90:0"/>
+		<IR id="481" name="net/Conv3D_38/output_transpose" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/transpose_7:0" out_port_id="net/transpose_7:0"/>
+		<IR id="970" name="net/transpose_755512433" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_90/stack_1:0" out_port_id="net/strided_slice_90/stack_1:0"/>
+		<IR id="627" name="net/strided_slice_90/stack_182611722" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/Maximum_41/x:0" out_port_id="net/Maximum_41/x:0"/>
+		<IR id="574" name="net/Maximum_41/x65511368" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_87/stack_2:0" out_port_id="net/strided_slice_87/stack_2:0"/>
+		<IR id="605" name="net/strided_slice_87/stack_280313108" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_98:0" out_port_id="net/strided_slice_98:0"/>
+		<IR id="687" name="net/strided_slice_98" out_port_id="4"/>
+	</map>
+	<map>
+		<framework name="net/mul_140:0" out_port_id="net/mul_140:0"/>
+		<IR id="670" name="net/mul_140" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/Maximum_50/x:0" out_port_id="net/Maximum_50/x:0"/>
+		<IR id="1355" name="net/Maximum_50/x52511476" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/mul_138:0" out_port_id="net/mul_138:0"/>
+		<IR id="599" name="net/mul_138" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/transpose_117/perm:0" out_port_id="net/transpose_117/perm:0"/>
+		<IR id="86" name="net/transpose_117/perm99511251" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/transpose_131/perm:0" out_port_id="net/transpose_131/perm:0"/>
+		<IR id="18" name="net/transpose_131/perm103111230" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/transpose_5:0" out_port_id="net/transpose_5:0"/>
+		<IR id="1011" name="net/transpose_5" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/Conv3D_29:0" out_port_id="net/Conv3D_29:0"/>
+		<IR id="379" name="net/Conv3D_29/output_transpose" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/transpose_69:0" out_port_id="net/transpose_69:0"/>
+		<IR id="379" name="net/Conv3D_29/output_transpose" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_96/stack:0" out_port_id="net/strided_slice_96/stack:0"/>
+		<IR id="666" name="net/strided_slice_96/stack86512025" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/Maximum_35/x:0" out_port_id="net/Maximum_35/x:0"/>
+		<IR id="506" name="net/Maximum_35/x65712358" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_106/stack_1:0" out_port_id="net/strided_slice_106/stack_1:0"/>
+		<IR id="738" name="net/strided_slice_106/stack_193811425" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/sub_59:0" out_port_id="net/sub_59:0"/>
+		<IR id="424" name="net/sub_59/sub" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/transpose_82/perm:0" out_port_id="net/transpose_82/perm:0"/>
+		<IR id="242" name="net/transpose_82/perm71211167" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/Maximum_11/x:0" out_port_id="net/Maximum_11/x:0"/>
+		<IR id="1142" name="net/Maximum_11/x53112691" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_95/stack_2:0" out_port_id="net/strided_slice_95/stack_2:0"/>
+		<IR id="664" name="net/strided_slice_95/stack_286313465" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/transpose_56:0" out_port_id="net/transpose_56:0"/>
+		<IR id="330" name="net/transpose_5666611686" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/mul_35:0" out_port_id="net/mul_35:0"/>
+		<IR id="1136" name="net/mul_34/Fused_Mul_" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_97/stack_1:0" out_port_id="net/strided_slice_97/stack_1:0"/>
+		<IR id="675" name="net/strided_slice_97/stack_187413300" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_90/stack_2:0" out_port_id="net/strided_slice_90/stack_2:0"/>
+		<IR id="628" name="net/strided_slice_90/stack_282712481" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_98/stack:0" out_port_id="net/strided_slice_98/stack:0"/>
+		<IR id="684" name="net/strided_slice_98/stack88413078" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/Maximum_38/x:0" out_port_id="net/Maximum_38/x:0"/>
+		<IR id="540" name="net/Maximum_38/x65613093" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_107/stack_1:0" out_port_id="net/strided_slice_107/stack_1:0"/>
+		<IR id="750" name="net/strided_slice_107/stack_195112004" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/transpose_33:0" out_port_id="net/transpose_33:0"/>
+		<IR id="1147" name="net/transpose_33" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_105/stack:0" out_port_id="net/strided_slice_105/stack:0"/>
+		<IR id="733" name="net/strided_slice_105/stack93311209" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_91/stack_1:0" out_port_id="net/strided_slice_91/stack_1:0"/>
+		<IR id="635" name="net/strided_slice_91/stack_183411797" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/Maximum_38:0" out_port_id="net/Maximum_38:0"/>
+		<IR id="542" name="net/Maximum_38" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/Tile_6:0" out_port_id="net/Tile_6:0"/>
+		<IR id="618" name="net/Tile_6" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/Conv3D_2:0" out_port_id="net/Conv3D_2:0"/>
+		<IR id="1015" name="net/Conv3D_2/output_transpose" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/transpose_6:0" out_port_id="net/transpose_6:0"/>
+		<IR id="1015" name="net/Conv3D_2/output_transpose" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_87:0" out_port_id="net/strided_slice_87:0"/>
+		<IR id="606" name="net/strided_slice_87" out_port_id="4"/>
+	</map>
+	<map>
+		<framework name="net/mul_143:0" out_port_id="net/mul_143:0"/>
+		<IR id="773" name="net/mul_143" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_86/stack:0" out_port_id="net/strided_slice_86/stack:0"/>
+		<IR id="595" name="net/strided_slice_86/stack79311581" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/Conv3D_44:0" out_port_id="net/Conv3D_44:0"/>
+		<IR id="549" name="net/Conv3D_44/output_transpose" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/transpose_104:0" out_port_id="net/transpose_104:0"/>
+		<IR id="549" name="net/Conv3D_44/output_transpose" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/mul_161:0" out_port_id="net/mul_161:0"/>
+		<IR id="1307" name="net/mul_160/Fused_Mul_" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_97:0" out_port_id="net/strided_slice_97:0"/>
+		<IR id="677" name="net/strided_slice_97" out_port_id="4"/>
+	</map>
+	<map>
+		<framework name="net/Tile_8/multiples:0" out_port_id="net/Tile_8/multiples:0"/>
+		<IR id="107" name="net/Tile_8/multiples94811305" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/Maximum_5:0" out_port_id="net/Maximum_5:0"/>
+		<IR id="1076" name="net/Maximum_5" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/Reshape_50:0" out_port_id="net/Reshape_50:0"/>
+		<IR id="338" name="net/Reshape_5066212373" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/transpose_98:0" out_port_id="net/transpose_98:0"/>
+		<IR id="150" name="net/transpose_9876212535" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/Maximum_23:0" out_port_id="net/Maximum_23:0"/>
+		<IR id="372" name="net/Maximum_23" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/add_100:0" out_port_id="net/add_100:0"/>
+		<IR id="416" name="net/sub_56/Fused_Add_" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/transpose_19:0" out_port_id="net/transpose_19:0"/>
+		<IR id="1079" name="net/transpose_19" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/transpose_75:0" out_port_id="net/transpose_75:0"/>
+		<IR id="409" name="net/transpose_75" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/mul_71:0" out_port_id="net/mul_71:0"/>
+		<IR id="364" name="net/mul_70/Fused_Mul_" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_101:0" out_port_id="net/strided_slice_101:0"/>
+		<IR id="708" name="net/strided_slice_101" out_port_id="4"/>
+	</map>
+	<map>
+		<framework name="net/add_32:0" out_port_id="net/add_32:0"/>
+		<IR id="1111" name="net/add_32" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_92/stack_2:0" out_port_id="net/strided_slice_92/stack_2:0"/>
+		<IR id="642" name="net/strided_slice_92/stack_284113072" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/add_80:0" out_port_id="net/add_80:0"/>
+		<IR id="348" name="net/sub_44/Fused_Add_" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_96:0" out_port_id="net/strided_slice_96:0"/>
+		<IR id="669" name="net/strided_slice_96" out_port_id="4"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_87/stack_1:0" out_port_id="net/strided_slice_87/stack_1:0"/>
+		<IR id="604" name="net/strided_slice_87/stack_180212394" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_98/stack_2:0" out_port_id="net/strided_slice_98/stack_2:0"/>
+		<IR id="686" name="net/strided_slice_98/stack_288613030" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/Maximum_8/x:0" out_port_id="net/Maximum_8/x:0"/>
+		<IR id="1108" name="net/Maximum_8/x53213021" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/add_130:0" out_port_id="net/add_130:0"/>
+		<IR id="518" name="net/sub_74/Fused_Add_" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/sub_89:0" out_port_id="net/sub_89:0"/>
+		<IR id="1265" name="net/sub_89/sub" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_107/stack:0" out_port_id="net/strided_slice_107/stack:0"/>
+		<IR id="749" name="net/strided_slice_107/stack95013195" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/mul_44:0" out_port_id="net/mul_44:0"/>
+		<IR id="1170" name="net/mul_43/Fused_Mul_" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/Maximum_41:0" out_port_id="net/Maximum_41:0"/>
+		<IR id="576" name="net/Maximum_41" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/Conv3D_5:0" out_port_id="net/Conv3D_5:0"/>
+		<IR id="1049" name="net/Conv3D_5/output_transpose" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/transpose_13:0" out_port_id="net/transpose_13:0"/>
+		<IR id="1049" name="net/Conv3D_5/output_transpose" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/Maximum_26/x:0" out_port_id="net/Maximum_26/x:0"/>
+		<IR id="404" name="net/Maximum_26/x66013141" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_110/stack_1:0" out_port_id="net/strided_slice_110/stack_1:0"/>
+		<IR id="769" name="net/strided_slice_110/stack_197011767" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_103:0" out_port_id="net/strided_slice_103:0"/>
+		<IR id="724" name="net/strided_slice_103" out_port_id="4"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_89:0" out_port_id="net/strided_slice_89:0"/>
+		<IR id="622" name="net/strided_slice_89" out_port_id="4"/>
+	</map>
+	<map>
+		<framework name="net/Tile_7:0" out_port_id="net/Tile_7:0"/>
+		<IR id="683" name="net/Tile_7" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/sub_77:0" out_port_id="net/sub_77:0"/>
+		<IR id="526" name="net/sub_77/sub" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_92:0" out_port_id="net/strided_slice_92:0"/>
+		<IR id="643" name="net/strided_slice_92" out_port_id="4"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_102/stack:0" out_port_id="net/strided_slice_102/stack:0"/>
+		<IR id="715" name="net/strided_slice_102/stack91512649" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/transpose_14:0" out_port_id="net/transpose_14:0"/>
+		<IR id="940" name="net/transpose_1457112397" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_95:0" out_port_id="net/strided_slice_95:0"/>
+		<IR id="665" name="net/strided_slice_95" out_port_id="4"/>
+	</map>
+	<map>
+		<framework name="net/transpose_63:0" out_port_id="net/transpose_63:0"/>
+		<IR id="300" name="net/transpose_6368211005" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/add_72:0" out_port_id="net/add_72:0"/>
+		<IR id="1247" name="net/add_72" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/transpose_40/perm:0" out_port_id="net/transpose_40/perm:0"/>
+		<IR id="852" name="net/transpose_40/perm61711893" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/transpose_54/perm:0" out_port_id="net/transpose_54/perm:0"/>
+		<IR id="792" name="net/transpose_54/perm64913060" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/transpose_119:0" out_port_id="net/transpose_119:0"/>
+		<IR id="50" name="net/transpose_119101513135" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/add_145:0" out_port_id="net/add_145:0"/>
+		<IR id="577" name="net/add_145" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/Maximum_44/x:0" out_port_id="net/Maximum_44/x:0"/>
+		<IR id="1279" name="net/Maximum_44/x52712034" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_85/stack:0" out_port_id="net/strided_slice_85/stack:0"/>
+		<IR id="591" name="net/strided_slice_85/stack78910891" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/add_176:0" out_port_id="net/add_176:0"/>
+		<IR id="1358" name="net/add_176" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/Shape_8:0" out_port_id="net/Shape_8:0"/>
+		<IR id="714" name="net/Shape_8" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_96/stack_2:0" out_port_id="net/strided_slice_96/stack_2:0"/>
+		<IR id="668" name="net/strided_slice_96/stack_286711575" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/sub_17:0" out_port_id="net/sub_17:0"/>
+		<IR id="1094" name="net/sub_17/sub" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/Maximum_2/x:0" out_port_id="net/Maximum_2/x:0"/>
+		<IR id="1040" name="net/Maximum_2/x53412439" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/mul_80:0" out_port_id="net/mul_80:0"/>
+		<IR id="398" name="net/mul_79/Fused_Mul_" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/Maximum_14/x:0" out_port_id="net/Maximum_14/x:0"/>
+		<IR id="1176" name="net/Maximum_14/x53011227" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_102/stack_2:0" out_port_id="net/strided_slice_102/stack_2:0"/>
+		<IR id="717" name="net/strided_slice_102/stack_291711854" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/Conv3D_53:0" out_port_id="net/Conv3D_53:0"/>
+		<IR id="1330" name="net/Conv3D_53/output_transpose" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/transpose_125:0" out_port_id="net/transpose_125:0"/>
+		<IR id="1330" name="net/Conv3D_53/output_transpose" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_92/stack_1:0" out_port_id="net/strided_slice_92/stack_1:0"/>
+		<IR id="641" name="net/strided_slice_92/stack_184011998" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_109:0" out_port_id="net/strided_slice_109:0"/>
+		<IR id="765" name="net/strided_slice_109" out_port_id="4"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_90/stack:0" out_port_id="net/strided_slice_90/stack:0"/>
+		<IR id="626" name="net/strided_slice_90/stack82511977" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/add_135:0" out_port_id="net/add_135:0"/>
+		<IR id="543" name="net/add_135" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/inp_x_sub_0_test:0" out_port_id="net/inp_x_sub_0_test:0"/>
+		<IR id="337" name="net/inp_x_sub_0_test" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_94/stack_2:0" out_port_id="net/strided_slice_94/stack_2:0"/>
+		<IR id="658" name="net/strided_slice_94/stack_285712064" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/add_95:0" out_port_id="net/add_95:0"/>
+		<IR id="407" name="net/add_95" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/transpose_12/perm:0" out_port_id="net/transpose_12/perm:0"/>
+		<IR id="972" name="net/transpose_12/perm55311197" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_109/stack:0" out_port_id="net/strided_slice_109/stack:0"/>
+		<IR id="762" name="net/strided_slice_109/stack96313447" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/Maximum_8:0" out_port_id="net/Maximum_8:0"/>
+		<IR id="1110" name="net/Maximum_8" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_99/stack_2:0" out_port_id="net/strided_slice_99/stack_2:0"/>
+		<IR id="693" name="net/strided_slice_99/stack_289312610" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/transpose_19/perm:0" out_port_id="net/transpose_19/perm:0"/>
+		<IR id="942" name="net/transpose_19/perm56912355" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/Conv3D_11:0" out_port_id="net/Conv3D_11:0"/>
+		<IR id="1117" name="net/Conv3D_11/output_transpose" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/transpose_27:0" out_port_id="net/transpose_27:0"/>
+		<IR id="1117" name="net/Conv3D_11/output_transpose" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/add_17:0" out_port_id="net/add_17:0"/>
+		<IR id="1052" name="net/sub_8/Fused_Add_" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/add_125:0" out_port_id="net/add_125:0"/>
+		<IR id="509" name="net/add_125" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_84:0" out_port_id="net/strided_slice_84:0"/>
+		<IR id="588" name="net/strided_slice_84" out_port_id="4"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_87/stack:0" out_port_id="net/strided_slice_87/stack:0"/>
+		<IR id="603" name="net/strided_slice_87/stack80111989" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_90:0" out_port_id="net/strided_slice_90:0"/>
+		<IR id="629" name="net/strided_slice_90" out_port_id="4"/>
+	</map>
+	<map>
+		<framework name="net/transpose_26/perm:0" out_port_id="net/transpose_26/perm:0"/>
+		<IR id="912" name="net/transpose_26/perm58510888" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_88/stack_2:0" out_port_id="net/strided_slice_88/stack_2:0"/>
+		<IR id="611" name="net/strided_slice_88/stack_280913120" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/mul_176/y:0" out_port_id="net/mul_176/y:0"/>
+		<IR id="1364" name="net/mul_176/y102912748" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_85/stack_1:0" out_port_id="net/strided_slice_85/stack_1:0"/>
+		<IR id="592" name="net/strided_slice_85/stack_179012757" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/Conv3D_32:0" out_port_id="net/Conv3D_32:0"/>
+		<IR id="413" name="net/Conv3D_32/output_transpose" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/transpose_76:0" out_port_id="net/transpose_76:0"/>
+		<IR id="413" name="net/Conv3D_32/output_transpose" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_104/stack_1:0" out_port_id="net/strided_slice_104/stack_1:0"/>
+		<IR id="728" name="net/strided_slice_104/stack_192811416" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/Maximum_35:0" out_port_id="net/Maximum_35:0"/>
+		<IR id="508" name="net/Maximum_35" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_89/stack:0" out_port_id="net/strided_slice_89/stack:0"/>
+		<IR id="619" name="net/strided_slice_89/stack81812961" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/mul_139:0" out_port_id="net/mul_139:0"/>
+		<IR id="631" name="net/mul_139" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/Maximum_23/x:0" out_port_id="net/Maximum_23/x:0"/>
+		<IR id="370" name="net/Maximum_23/x66112376" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/Maximum_14:0" out_port_id="net/Maximum_14:0"/>
+		<IR id="1178" name="net/Maximum_14" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/sub_53:0" out_port_id="net/sub_53:0"/>
+		<IR id="390" name="net/sub_53/sub" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_98/stack_1:0" out_port_id="net/strided_slice_98/stack_1:0"/>
+		<IR id="685" name="net/strided_slice_98/stack_188511710" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/add_22:0" out_port_id="net/add_22:0"/>
+		<IR id="1077" name="net/add_22" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_100/stack_1:0" out_port_id="net/strided_slice_100/stack_1:0"/>
+		<IR id="698" name="net/strided_slice_100/stack_189812316" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/mul_89:0" out_port_id="net/mul_89:0"/>
+		<IR id="432" name="net/mul_88/Fused_Mul_" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_100/stack_2:0" out_port_id="net/strided_slice_100/stack_2:0"/>
+		<IR id="699" name="net/strided_slice_100/stack_289913276" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/transpose_131:0" out_port_id="net/transpose_131:0"/>
+		<IR id="1368" name="net/transpose_131" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/transpose_96:0" out_port_id="net/transpose_96:0"/>
+		<IR id="511" name="net/transpose_96" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/transpose_28:0" out_port_id="net/transpose_28:0"/>
+		<IR id="880" name="net/transpose_2860310882" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/add_171:0" out_port_id="net/add_171:0"/>
+		<IR id="1333" name="net/sub_98/Fused_Add_" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_101/stack_1:0" out_port_id="net/strided_slice_101/stack_1:0"/>
+		<IR id="706" name="net/strided_slice_101/stack_190612265" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_93/stack_1:0" out_port_id="net/strided_slice_93/stack_1:0"/>
+		<IR id="651" name="net/strided_slice_93/stack_185012163" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_95/stack:0" out_port_id="net/strided_slice_95/stack:0"/>
+		<IR id="662" name="net/strided_slice_95/stack86111839" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_103/stack_2:0" out_port_id="net/strided_slice_103/stack_2:0"/>
+		<IR id="723" name="net/strided_slice_103/stack_292311068" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/add_150:0" out_port_id="net/add_150:0"/>
+		<IR id="1257" name="net/sub_86/Fused_Add_" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_101/stack_2:0" out_port_id="net/strided_slice_101/stack_2:0"/>
+		<IR id="707" name="net/strided_slice_101/stack_290712823" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_86/stack_1:0" out_port_id="net/strided_slice_86/stack_1:0"/>
+		<IR id="596" name="net/strided_slice_86/stack_179412625" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_106:0" out_port_id="net/strided_slice_106:0"/>
+		<IR id="740" name="net/strided_slice_106" out_port_id="4"/>
+	</map>
+	<map>
+		<framework name="net/transpose_33/perm:0" out_port_id="net/transpose_33/perm:0"/>
+		<IR id="882" name="net/transpose_33/perm60111149" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/transpose_68/perm:0" out_port_id="net/transpose_68/perm:0"/>
+		<IR id="302" name="net/transpose_68/perm68012592" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/Conv3D_47:0" out_port_id="net/Conv3D_47:0"/>
+		<IR id="583" name="net/Conv3D_47/output_transpose" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/transpose_111:0" out_port_id="net/transpose_111:0"/>
+		<IR id="583" name="net/Conv3D_47/output_transpose" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/Shape_7:0" out_port_id="net/Shape_7:0"/>
+		<IR id="649" name="net/Shape_7" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="net/transpose_82:0" out_port_id="net/transpose_82:0"/>
+		<IR id="443" name="net/transpose_82" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/transpose_70:0" out_port_id="net/transpose_70:0"/>
+		<IR id="270" name="net/transpose_7069813390" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/transpose_138:0" out_port_id="net/transpose_138:0"/>
+		<IR id="1378" name="net/transpose_138" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/sub_71:0" out_port_id="net/sub_71:0"/>
+		<IR id="492" name="net/sub_71/sub" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/Tile_8:0" out_port_id="net/Tile_8:0"/>
+		<IR id="748" name="net/Tile_8" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/Conv3D_8:0" out_port_id="net/Conv3D_8:0"/>
+		<IR id="1083" name="net/Conv3D_8/output_transpose" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/transpose_20:0" out_port_id="net/transpose_20:0"/>
+		<IR id="1083" name="net/Conv3D_8/output_transpose" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/transpose_110:0" out_port_id="net/transpose_110:0"/>
+		<IR id="579" name="net/transpose_110" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/Conv3D_20:0" out_port_id="net/Conv3D_20:0"/>
+		<IR id="1219" name="net/Conv3D_20/output_transpose" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/transpose_48:0" out_port_id="net/transpose_48:0"/>
+		<IR id="1219" name="net/Conv3D_20/output_transpose" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/transpose_47:0" out_port_id="net/transpose_47:0"/>
+		<IR id="1215" name="net/transpose_47" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/transpose_49:0" out_port_id="net/transpose_49:0"/>
+		<IR id="790" name="net/transpose_4965110978" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/transpose_61:0" out_port_id="net/transpose_61:0"/>
+		<IR id="341" name="net/transpose_61" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_91:0" out_port_id="net/strided_slice_91:0"/>
+		<IR id="637" name="net/strided_slice_91" out_port_id="4"/>
+	</map>
+	<map>
+		<framework name="net/transpose_40:0" out_port_id="net/transpose_40:0"/>
+		<IR id="1181" name="net/transpose_40" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_106/stack_2:0" out_port_id="net/strided_slice_106/stack_2:0"/>
+		<IR id="739" name="net/strided_slice_106/stack_293910849" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_84/stack:0" out_port_id="net/strided_slice_84/stack:0"/>
+		<IR id="585" name="net/strided_slice_84/stack78311116" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_91/stack_2:0" out_port_id="net/strided_slice_91/stack_2:0"/>
+		<IR id="636" name="net/strided_slice_91/stack_283512211" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/transpose_105:0" out_port_id="net/transpose_105:0"/>
+		<IR id="120" name="net/transpose_10577811962" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_101/stack:0" out_port_id="net/strided_slice_101/stack:0"/>
+		<IR id="705" name="net/strided_slice_101/stack90511341" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_108:0" out_port_id="net/strided_slice_108:0"/>
+		<IR id="759" name="net/strided_slice_108" out_port_id="4"/>
+	</map>
+	<map>
+		<framework name="net/concat_8:0" out_port_id="net/concat_8:0"/>
+		<IR id="1377" name="net/concat_8104211233" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/sub_47:0" out_port_id="net/sub_47:0"/>
+		<IR id="356" name="net/sub_47/sub" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_88:0" out_port_id="net/strided_slice_88:0"/>
+		<IR id="612" name="net/strided_slice_88" out_port_id="4"/>
+	</map>
+	<map>
+		<framework name="net/mul_164/y:0" out_port_id="net/mul_164/y:0"/>
+		<IR id="1322" name="net/mul_164/y101110741" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_109/stack_2:0" out_port_id="net/strided_slice_109/stack_2:0"/>
+		<IR id="764" name="net/strided_slice_109/stack_296511200" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/Maximum_47:0" out_port_id="net/Maximum_47:0"/>
+		<IR id="1315" name="net/Maximum_47" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/Conv3D_41:0" out_port_id="net/Conv3D_41:0"/>
+		<IR id="515" name="net/Conv3D_41/output_transpose" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/transpose_97:0" out_port_id="net/transpose_97:0"/>
+		<IR id="515" name="net/Conv3D_41/output_transpose" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/Reshape_117/shape:0" out_port_id="net/Reshape_117/shape:0"/>
+		<IR id="777" name="net/Reshape_117/Cast_1" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="net/sub_101:0" out_port_id="net/sub_101:0"/>
+		<IR id="1341" name="net/sub_101/sub" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/add_90:0" out_port_id="net/add_90:0"/>
+		<IR id="382" name="net/sub_50/Fused_Add_" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_111/stack:0" out_port_id="net/strided_slice_111/stack:0"/>
+		<IR id="104" name="net/strided_slice_111/stack98011017" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/sub_23:0" out_port_id="net/sub_23:0"/>
+		<IR id="1128" name="net/sub_23/sub" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/Maximum_5/x:0" out_port_id="net/Maximum_5/x:0"/>
+		<IR id="1074" name="net/Maximum_5/x53311545" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/Reshape_114:0" out_port_id="net/Reshape_114:0"/>
+		<IR id="682" name="net/Reshape_114" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/inp_x_test:0" out_port_id="net/inp_x_test:0"/>
+		<IR id="1007" name="net/inp_x_test" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/transpose_103/perm:0" out_port_id="net/transpose_103/perm:0"/>
+		<IR id="152" name="net/transpose_103/perm76011203" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/add_140:0" out_port_id="net/add_140:0"/>
+		<IR id="552" name="net/sub_80/Fused_Add_" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/Maximum_2:0" out_port_id="net/Maximum_2:0"/>
+		<IR id="1042" name="net/Maximum_2" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/mul_141:0" out_port_id="net/mul_141:0"/>
+		<IR id="702" name="net/mul_141" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_99/stack_1:0" out_port_id="net/strided_slice_99/stack_1:0"/>
+		<IR id="692" name="net/strided_slice_99/stack_189212766" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/transpose_77:0" out_port_id="net/transpose_77:0"/>
+		<IR id="240" name="net/transpose_7771412181" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/transpose:0" out_port_id="net/transpose:0"/>
+		<IR id="1000" name="net/transpose53911608" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/transpose_124/perm:0" out_port_id="net/transpose_124/perm:0"/>
+		<IR id="52" name="net/transpose_124/perm101312061" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_99:0" out_port_id="net/strided_slice_99:0"/>
+		<IR id="694" name="net/strided_slice_99" out_port_id="4"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_91/stack:0" out_port_id="net/strided_slice_91/stack:0"/>
+		<IR id="634" name="net/strided_slice_91/stack83311788" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/mul_98:0" out_port_id="net/mul_98:0"/>
+		<IR id="466" name="net/mul_97/Fused_Mul_" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/sub_65:0" out_port_id="net/sub_65:0"/>
+		<IR id="458" name="net/sub_65/sub" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_108/stack:0" out_port_id="net/strided_slice_108/stack:0"/>
+		<IR id="756" name="net/strided_slice_108/stack95710765" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_107:0" out_port_id="net/strided_slice_107:0"/>
+		<IR id="752" name="net/strided_slice_107" out_port_id="4"/>
+	</map>
+	<map>
+		<framework name="net/Conv3D_17:0" out_port_id="net/Conv3D_17:0"/>
+		<IR id="1185" name="net/Conv3D_17/output_transpose" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/transpose_41:0" out_port_id="net/transpose_41:0"/>
+		<IR id="1185" name="net/Conv3D_17/output_transpose" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/add_57:0" out_port_id="net/add_57:0"/>
+		<IR id="1188" name="net/sub_32/Fused_Add_" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_96/stack_1:0" out_port_id="net/strided_slice_96/stack_1:0"/>
+		<IR id="667" name="net/strided_slice_96/stack_186611527" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_108/stack_1:0" out_port_id="net/strided_slice_108/stack_1:0"/>
+		<IR id="757" name="net/strided_slice_108/stack_195811014" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/add_85:0" out_port_id="net/add_85:0"/>
+		<IR id="373" name="net/add_85" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/transpose_91:0" out_port_id="net/transpose_91:0"/>
+		<IR id="180" name="net/transpose_9174611794" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/transpose_110/perm:0" out_port_id="net/transpose_110/perm:0"/>
+		<IR id="122" name="net/transpose_110/perm77610969" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/mul_53:0" out_port_id="net/mul_53:0"/>
+		<IR id="1204" name="net/mul_52/Fused_Mul_" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_111/stack_2:0" out_port_id="net/strided_slice_111/stack_2:0"/>
+		<IR id="106" name="net/strided_slice_111/stack_298212178" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/Reshape_113/shape:0" out_port_id="net/Reshape_113/shape:0"/>
+		<IR id="647" name="net/Reshape_113/Cast_1" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="net/Reshape_115/shape:0" out_port_id="net/Reshape_115/shape:0"/>
+		<IR id="712" name="net/Reshape_115/Cast_1" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="net/mul_125:0" out_port_id="net/mul_125:0"/>
+		<IR id="568" name="net/mul_124/Fused_Mul_" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/transpose_61/perm:0" out_port_id="net/transpose_61/perm:0"/>
+		<IR id="332" name="net/transpose_61/perm66411188" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/Reshape_112:0" out_port_id="net/Reshape_112:0"/>
+		<IR id="617" name="net/Reshape_112" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/transpose_68:0" out_port_id="net/transpose_68:0"/>
+		<IR id="375" name="net/transpose_68" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_88/stack:0" out_port_id="net/strided_slice_88/stack:0"/>
+		<IR id="609" name="net/strided_slice_88/stack80712760" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/transpose_42:0" out_port_id="net/transpose_42:0"/>
+		<IR id="820" name="net/transpose_4263513051" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_85/stack_2:0" out_port_id="net/strided_slice_85/stack_2:0"/>
+		<IR id="593" name="net/strided_slice_85/stack_279111866" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_105/stack_1:0" out_port_id="net/strided_slice_105/stack_1:0"/>
+		<IR id="734" name="net/strided_slice_105/stack_193411452" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/mul_62:0" out_port_id="net/mul_62:0"/>
+		<IR id="1238" name="net/mul_61/Fused_Mul_" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/transpose_26:0" out_port_id="net/transpose_26:0"/>
+		<IR id="1113" name="net/transpose_26" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/Maximum_29:0" out_port_id="net/Maximum_29:0"/>
+		<IR id="440" name="net/Maximum_29" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_102/stack_1:0" out_port_id="net/strided_slice_102/stack_1:0"/>
+		<IR id="716" name="net/strided_slice_102/stack_191612079" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_107/stack_2:0" out_port_id="net/strided_slice_107/stack_2:0"/>
+		<IR id="751" name="net/strided_slice_107/stack_295211272" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/Maximum_47/x:0" out_port_id="net/Maximum_47/x:0"/>
+		<IR id="1313" name="net/Maximum_47/x52611755" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_105/stack_2:0" out_port_id="net/strided_slice_105/stack_2:0"/>
+		<IR id="735" name="net/strided_slice_105/stack_293511779" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/mul_107:0" out_port_id="net/mul_107:0"/>
+		<IR id="500" name="net/mul_106/Fused_Mul_" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/transpose_12:0" out_port_id="net/transpose_12:0"/>
+		<IR id="1045" name="net/transpose_12" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_97/stack:0" out_port_id="net/strided_slice_97/stack:0"/>
+		<IR id="674" name="net/strided_slice_97/stack87311833" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_100/stack:0" out_port_id="net/strided_slice_100/stack:0"/>
+		<IR id="697" name="net/strided_slice_100/stack89710852" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/mul_176:0" out_port_id="net/mul_176:0"/>
+		<IR id="1366" name="net/mul_176" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_85:0" out_port_id="net/strided_slice_85:0"/>
+		<IR id="594" name="net/strided_slice_85" out_port_id="4"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_84/stack_2:0" out_port_id="net/strided_slice_84/stack_2:0"/>
+		<IR id="587" name="net/strided_slice_84/stack_278511503" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/mul_116:0" out_port_id="net/mul_116:0"/>
+		<IR id="534" name="net/mul_115/Fused_Mul_" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_111:0" out_port_id="net/strided_slice_111:0"/>
+		<IR id="779" name="net/strided_slice_111" out_port_id="4"/>
+	</map>
+	<map>
+		<framework name="net/add_62:0" out_port_id="net/add_62:0"/>
+		<IR id="1213" name="net/add_62" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/add_47:0" out_port_id="net/add_47:0"/>
+		<IR id="1154" name="net/sub_26/Fused_Add_" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/add_42:0" out_port_id="net/add_42:0"/>
+		<IR id="1145" name="net/add_42" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/Reshape_116/shape:0" out_port_id="net/Reshape_116/shape:0"/>
+		<IR id="746" name="net/Reshape_116/Cast_1" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="net/transpose_21:0" out_port_id="net/transpose_21:0"/>
+		<IR id="910" name="net/transpose_2158711758" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/Reshape_115:0" out_port_id="net/Reshape_115:0"/>
+		<IR id="713" name="net/Reshape_115" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/truediv_53:0" out_port_id="net/truediv_53:0"/>
+		<IR id="1373" name="net/add_180/Fused_Add_" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_104/stack:0" out_port_id="net/strided_slice_104/stack:0"/>
+		<IR id="727" name="net/strided_slice_104/stack92713333" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_103/stack_1:0" out_port_id="net/strided_slice_103/stack_1:0"/>
+		<IR id="722" name="net/strided_slice_103/stack_192211569" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/add_52:0" out_port_id="net/add_52:0"/>
+		<IR id="1179" name="net/add_52" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/sub_95:0" out_port_id="net/sub_95:0"/>
+		<IR id="1299" name="net/sub_95/sub" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/Conv3D_26:0" out_port_id="net/Conv3D_26:0"/>
+		<IR id="345" name="net/Conv3D_26/output_transpose" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/transpose_62:0" out_port_id="net/transpose_62:0"/>
+		<IR id="345" name="net/Conv3D_26/output_transpose" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/add_165:0" out_port_id="net/add_165:0"/>
+		<IR id="1316" name="net/add_165" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_105:0" out_port_id="net/strided_slice_105:0"/>
+		<IR id="736" name="net/strided_slice_105" out_port_id="4"/>
+	</map>
+	<map>
+		<framework name="net/transpose_137:0" out_port_id="net/transpose_137:0"/>
+		<IR id="1375" name="net/transpose_137" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/sub_29:0" out_port_id="net/sub_29:0"/>
+		<IR id="1162" name="net/sub_29/sub" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/Maximum_20:0" out_port_id="net/Maximum_20:0"/>
+		<IR id="1246" name="net/Maximum_20" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_93/stack:0" out_port_id="net/strided_slice_93/stack:0"/>
+		<IR id="650" name="net/strided_slice_93/stack84911395" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/Reshape_117:0" out_port_id="net/Reshape_117:0"/>
+		<IR id="778" name="net/Reshape_117" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/concat_7:0" out_port_id="net/concat_7:0"/>
+		<IR id="1374" name="net/concat_7103910843" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_94:0" out_port_id="net/strided_slice_94:0"/>
+		<IR id="659" name="net/strided_slice_94" out_port_id="4"/>
+	</map>
+	<map>
+		<framework name="net/sub_41:0" out_port_id="net/sub_41:0"/>
+		<IR id="1230" name="net/sub_41/sub" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_109/stack_1:0" out_port_id="net/strided_slice_109/stack_1:0"/>
+		<IR id="763" name="net/strided_slice_109/stack_196410834" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/mul_142:0" out_port_id="net/mul_142:0"/>
+		<IR id="741" name="net/mul_142" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_108/stack_2:0" out_port_id="net/strided_slice_108/stack_2:0"/>
+		<IR id="758" name="net/strided_slice_108/stack_295911929" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_94/stack:0" out_port_id="net/strided_slice_94/stack:0"/>
+		<IR id="656" name="net/strided_slice_94/stack85513381" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/Conv3D_35:0" out_port_id="net/Conv3D_35:0"/>
+		<IR id="447" name="net/Conv3D_35/output_transpose" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/transpose_83:0" out_port_id="net/transpose_83:0"/>
+		<IR id="447" name="net/Conv3D_35/output_transpose" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/Conv3D_56:0" out_port_id="net/Conv3D_56:0"/>
+		<IR id="1372" name="net/Conv3D_56/output_transpose" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/transpose_132:0" out_port_id="net/transpose_132:0"/>
+		<IR id="1372" name="net/Conv3D_56/output_transpose" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/Maximum_32:0" out_port_id="net/Maximum_32:0"/>
+		<IR id="474" name="net/Maximum_32" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/add_27:0" out_port_id="net/add_27:0"/>
+		<IR id="1086" name="net/sub_14/Fused_Add_" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_110/stack:0" out_port_id="net/strided_slice_110/stack:0"/>
+		<IR id="768" name="net/strided_slice_110/stack96912463" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_89/stack_1:0" out_port_id="net/strided_slice_89/stack_1:0"/>
+		<IR id="620" name="net/strided_slice_89/stack_181912745" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_84/stack_1:0" out_port_id="net/strided_slice_84/stack_1:0"/>
+		<IR id="586" name="net/strided_slice_84/stack_178412406" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/mul_139/y:0" out_port_id="net/mul_139/y:0"/>
+		<IR id="630" name="net/mul_139/y82910897" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_103/stack:0" out_port_id="net/strided_slice_103/stack:0"/>
+		<IR id="721" name="net/strided_slice_103/stack92112916" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/add_12:0" out_port_id="net/add_12:0"/>
+		<IR id="1043" name="net/add_12" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/mul_26:0" out_port_id="net/mul_26:0"/>
+		<IR id="1102" name="net/mul_25/Fused_Mul_" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/mul_8:0" out_port_id="net/mul_8:0"/>
+		<IR id="1034" name="net/mul_7/Fused_Mul_" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/sub_5:0" out_port_id="net/sub_5:0"/>
+		<IR id="1026" name="net/sub_5/sub" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/add_115:0" out_port_id="net/add_115:0"/>
+		<IR id="475" name="net/add_115" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/Reshape_112/shape:0" out_port_id="net/Reshape_112/shape:0"/>
+		<IR id="616" name="net/Reshape_112/Cast_1" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="net/transpose_47/perm:0" out_port_id="net/transpose_47/perm:0"/>
+		<IR id="822" name="net/transpose_47/perm63312697" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/mul_152:0" out_port_id="net/mul_152:0"/>
+		<IR id="1273" name="net/mul_151/Fused_Mul_" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/sub_83:0" out_port_id="net/sub_83:0"/>
+		<IR id="560" name="net/sub_83/sub" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/Maximum_11:0" out_port_id="net/Maximum_11:0"/>
+		<IR id="1144" name="net/Maximum_11" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/transpose_103:0" out_port_id="net/transpose_103:0"/>
+		<IR id="545" name="net/transpose_103" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/add_110:0" out_port_id="net/add_110:0"/>
+		<IR id="450" name="net/sub_62/Fused_Add_" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/Conv3D_50:0" out_port_id="net/Conv3D_50:0"/>
+		<IR id="1288" name="net/Conv3D_50/output_transpose" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/transpose_118:0" out_port_id="net/transpose_118:0"/>
+		<IR id="1288" name="net/Conv3D_50/output_transpose" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/add_2:0" out_port_id="net/add_2:0"/>
+		<IR id="1009" name="net/add_2" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_102:0" out_port_id="net/strided_slice_102:0"/>
+		<IR id="718" name="net/strided_slice_102" out_port_id="4"/>
+	</map>
+	<map>
+		<framework name="net/Shape_6:0" out_port_id="net/Shape_6:0"/>
+		<IR id="584" name="net/Shape_6" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="net/Maximum_17/x:0" out_port_id="net/Maximum_17/x:0"/>
+		<IR id="1210" name="net/Maximum_17/x52913249" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/Maximum_20/x:0" out_port_id="net/Maximum_20/x:0"/>
+		<IR id="1244" name="net/Maximum_20/x52813477" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="net/strided_slice_110:0" out_port_id="net/strided_slice_110:0"/>
+		<IR id="771" name="net/strided_slice_110" out_port_id="4"/>
+	</map>
+	<map>
+		<framework name="net/add_160:0" out_port_id="net/add_160:0"/>
+		<IR id="1291" name="net/sub_92/Fused_Add_" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="net/Tile_7/multiples:0" out_port_id="net/Tile_7/multiples:0"/>
+		<IR id="108" name="net/Tile_7/multiples88212574" out_port_id="0"/>
+	</map>
+</mapping>

@@ -21,7 +21,7 @@ class ModelParameters(object) :
         if 1 in residConnAtLayersNormal : self.errorResLayer1("Normal")
         if 1 in residConnAtLayersSubsampled : self.errorResLayer1("Subsampled")
         if 1 in residConnAtLayersFc : self.errorResLayer1("Fully Connected")
-        
+
     #To be called from outside too.
     @staticmethod
     def getDefaultSessionName() :
@@ -38,7 +38,7 @@ class ModelParameters(object) :
         else :
             dropoutForExtraFcs = [0.5]
         return dropoutForExtraFcs
-    
+
     #ERRORS
     @staticmethod
     def errorSegmDimensionsSmallerThanReceptiveF(receptiveFieldNormal, segmentDimensions, tr0_val1_inf2) :
@@ -48,15 +48,15 @@ class ModelParameters(object) :
     def errorRequireNumberOfClasses() :
         print("ERROR: Number of classses not specified in the config file, which is required. Please specify in the format: numberOfOutputClasses = 3 (any integer). This number should be including the background class! For instance if the class is binary, set this to 2! Exiting!"); exit(1)
     errReqNumClasses = errorRequireNumberOfClasses
-    
-    
+
+
     @staticmethod
     def errorRequireNumberOfChannels() :
         print("ERROR: Parameter \"numberOfInputChannels\" not specified or specified smaller than 1. Please specify the number of input channels that will be used as input to the CNN, in the format: numberOfInputChannels = number (an integer > 0). Exiting!"); exit(1)
     errReqNumChannels = errorRequireNumberOfChannels
     @staticmethod
     def errorRequireFMsNormalPathwayGreaterThanNothing() :
-        print("ERROR: The required parameter \"numberFMsPerLayerNormal\" was either not given, or given an empty list. This parameter should be given in the format: numberFMsPerLayerNormal = [number-of-FMs-layer1, ..., number-of-FMs-layer-N], where each number is an integer greater than zero. It specifies the number of layers (specified by the number of entries in the list) and the number of Feature Maps at each layer of the normal-scale pathway. Please provide and retry. Exiting!"); exit(1)                
+        print("ERROR: The required parameter \"numberFMsPerLayerNormal\" was either not given, or given an empty list. This parameter should be given in the format: numberFMsPerLayerNormal = [number-of-FMs-layer1, ..., number-of-FMs-layer-N], where each number is an integer greater than zero. It specifies the number of layers (specified by the number of entries in the list) and the number of Feature Maps at each layer of the normal-scale pathway. Please provide and retry. Exiting!"); exit(1)
     errReqFMsNormal = errorRequireFMsNormalPathwayGreaterThanNothing
     @staticmethod
     def errorRequireKernelDimensionsPerLayerNormal() :
@@ -82,14 +82,14 @@ class ModelParameters(object) :
     @staticmethod
     def errorReqActivFunction() :
         print("ERROR: Parameter \"activationFunction\" has been given invalid value. Exiting!"); exit(1)
-        
+
     @staticmethod
     def errReqSameNumOfLayersPerSubPathway():
         print("ERROR: Parameter \"numberFMsPerLayerSubsampled\" has been given as a list of sublists of integers. This triggers the construction of multiple low-scale pathways.")
         print("\tHowever currently this functionality requires that the same number of layers are used in both pathways (limitation in the code).")
         print("\tUser specified in \"numberFMsPerLayerSubsampled\" sublists of different length. Each list should have the same lenght, as many as the wanted number of layers. Please adress this.")
         print("Exiting!"); exit(1)
-    
+
     @staticmethod
     def errorSubFactor3d() :
         print("ERROR: The parameter \"subsampleFactor\" must have 3 entries, one for each of the 3 dimensions. Please provide it in the format: subsampleFactor = [subFactor-dim1, subFactor-dim2, subFactor-dim3]. Each of the entries should be an integer, eg [3,3,3].")
@@ -100,24 +100,24 @@ class ModelParameters(object) :
     def errorRequireSegmentDimensionsTrain() :
         print("ERROR: The parameter \"segmentsDimTrain\" was is required but not given. It specifies the size of the 3D segment that is given as input to the network. It should be at least as large as the receptive field of the network in each dimension. Please specify it in the format: segmentsDimTrain = [dim-1, dim-2, dim-3]. Exiting!"); exit(1)
     errReqSegmDimTrain = errorRequireSegmentDimensionsTrain
-    
+
     @staticmethod
     def errorResLayer1(strPathwayType) :
         print("ERROR: The parameter \"layersWithResidualConn\" for the [", strPathwayType, "] pathway was specified to include the number 1, ie the 1st layer.")
         print("\t This is not an acceptable value, as a residual connection is made between the output of the specified layer and the input of the previous layer. There is no layer before the 1st!")
         print("\t Provide a list that does not iinclude the first layer, eg layersWithResidualConnNormal = [4,6,8], or an empty list [] for no such connections. Exiting!"); exit(1)
-        
+
     @staticmethod
     def warnForSameReceptiveField() :
         print("WARN: Because of limitations to the developed system, the two pathways must have the save size of receptive field. If unsure of how to proceed, please ommit specifying \"numberFMsPerLayerSubsampled\" and \"kernelDimPerLayerSubsampled\" in the config file, and the second subsampled pathway will be automatically created to mirror the normal. Else, if you want to just specify the number of Feature Maps in the subsampled, provide \"numberFMsPerLayerSubsampled\" = [num-FMs-layer1, ..., num-FMs-layerN], with N the same number as the normal pathway, and we will then use the same kernel-sizes as the normal pathway.")
     @staticmethod
     def warnSubFactorOdd() :
         print("WARN: The system was only thoroughly tested for ODD subsampling factor! (Eg subsampleFactor = [3,3,3]).")
-        
+
     # OTHERS
     @staticmethod
     def changeDatastructureToListOfListsForSecondaryPathwaysIfNeeded(listFromConfig) :
-        # subsampleFactorFromConfig: whatever given in the config by the user (except None). 
+        # subsampleFactorFromConfig: whatever given in the config by the user (except None).
         if not isinstance(listFromConfig, list) :
             print("ERROR: variable \"", listFromConfig, "\" given in modelConfig.cfg should be either a list of integers, or a list of lists of integers, in case multiple lower-scale pathways are wanted. Please correct it. Exiting."); exit(1)
         allElementsAreLists = True
@@ -134,7 +134,7 @@ class ModelParameters(object) :
             return [ listFromConfig ]
         else :
             return listFromConfig
-           
+
     def checkThatSublistsHaveSameLength(self, listWithSublists):
         if len(listWithSublists) == 0 :
             return True
@@ -143,16 +143,18 @@ class ModelParameters(object) :
             if lengthOfFirst != len(listWithSublists[subList_i]) :
                 return False
         return True
-           
-           
+
+
     def __init__(   self,
                     log,
                     cfg
                     ):
-        
-        self.log = log        
+
+        self.log = log
         self.cnnModelName = cfg[cfg.MODEL_NAME] if cfg[cfg.MODEL_NAME] is not None else getDefaultModelName()
-        
+
+        self.frameworks = cfg[cfg.FRAMEWORKS]
+
         #===========MODEL PARAMETERS==========
         self.numberClasses = cfg[cfg.NUM_CLASSES] if cfg[cfg.NUM_CLASSES] is not None else self.errReqNumClasses()
         self.numberOfInputChannelsNormal = cfg[cfg.NUM_INPUT_CHANS] if cfg[cfg.NUM_INPUT_CHANS] is not None else self.errReqNumChannels()
@@ -164,7 +166,7 @@ class ModelParameters(object) :
         self.receptiveFieldNormal = calcRecFieldFromKernDimListPerLayerWhenStrides1(self.kernDimPerLayerNormal) # Just for COMPATIBILITY CHECKS!
         residConnAtLayersNormal = cfg[cfg.RESID_CONN_LAYERS_NORM] if cfg[cfg.RESID_CONN_LAYERS_NORM] is not None else [] #layer number, starting from 1 for 1st layer. NOT indices.
         lowerRankLayersNormal = cfg[cfg.LOWER_RANK_LAYERS_NORM] if cfg[cfg.LOWER_RANK_LAYERS_NORM] is not None else [] #layer number, starting from 1 for 1st layer. NOT indices.
-        
+
         #==Subsampled pathway==
         self.useSubsampledBool = cfg[cfg.USE_SUBSAMPLED] if cfg[cfg.USE_SUBSAMPLED] is not None else False
         if not self.useSubsampledBool :
@@ -174,7 +176,7 @@ class ModelParameters(object) :
             self.subsampleFactor = []
             residConnAtLayersSubsampled = []
             lowerRankLayersSubsampled = []
-            
+
         else :
             self.numFMsPerLayerSubsampled = cfg[cfg.N_FMS_SUBS] if cfg[cfg.N_FMS_SUBS] is not None else self.numFMsPerLayerNormal
             self.numFMsPerLayerSubsampled = self.changeDatastructureToListOfListsForSecondaryPathwaysIfNeeded(self.numFMsPerLayerSubsampled)
@@ -214,17 +216,17 @@ class ModelParameters(object) :
             # If less sublists in subsampleFactor were given than numOfSubsPaths, add more sublists of subsampleFactors, for the extra subpaths.
             for _ in range( numOfSubsPaths - len(self.subsampleFactor) ) :
                 self.subsampleFactor.append( [ subFactorInDim_i + 2 for subFactorInDim_i in self.subsampleFactor[-1] ] ) # Adds one more sublist, eg [5,5,5], which is the last subFactor, increased by +2 in all rcz dimensions.
-            
+
             # Residuals and lower ranks.
             residConnAtLayersSubsampled = cfg[cfg.RESID_CONN_LAYERS_SUBS] if cfg[cfg.RESID_CONN_LAYERS_SUBS] is not None else residConnAtLayersNormal
             lowerRankLayersSubsampled = cfg[cfg.LOWER_RANK_LAYERS_SUBS] if cfg[cfg.LOWER_RANK_LAYERS_SUBS] is not None else lowerRankLayersNormal
-            
+
         #==FC Layers==
         self.numFMsInExtraFcs = cfg[cfg.N_FMS_FC] if cfg[cfg.N_FMS_FC] is not None else []
         self.kernelDimensionsFirstFcLayer = cfg[cfg.KERN_DIM_1ST_FC] if cfg[cfg.KERN_DIM_1ST_FC] is not None else [1,1,1]
         assert len(self.kernelDimensionsFirstFcLayer) == 3 and (False not in [ dim > 0 for dim in self.kernelDimensionsFirstFcLayer] )
         residConnAtLayersFc = cfg[cfg.RESID_CONN_LAYERS_FC] if cfg[cfg.RESID_CONN_LAYERS_FC] is not None else []
-                                        
+
         #==Size of Image Segments ==
         self.segmDimNormalTrain = cfg[cfg.SEG_DIM_TRAIN] if cfg[cfg.SEG_DIM_TRAIN] is not None else self.errReqSegmDimTrain()
         self.segmDimNormalVal = cfg[cfg.SEG_DIM_VAL] if cfg[cfg.SEG_DIM_VAL] is not None else self.receptiveFieldNormal
@@ -233,13 +235,13 @@ class ModelParameters(object) :
             if not checkRecFieldVsSegmSize(self.receptiveFieldNormal, segmentDimensions) :
                 self.errorSegmDimensionsSmallerThanReceptiveF(self.receptiveFieldNormal, segmentDimensions, tr0_val1_inf2)
 
-        
+
         #=== Dropout rates ===
         self.dropNormal = cfg[cfg.DROP_NORM] if cfg[cfg.DROP_NORM] is not None else []
         self.dropSubsampled = cfg[cfg.DROP_SUBS] if cfg[cfg.DROP_SUBS] is not None else []
         self.dropFc = cfg[cfg.DROP_FC] if cfg[cfg.DROP_FC] is not None else self.defaultDropFcList(self.numFMsInExtraFcs) #default = [0.0, 0.5, ..., 0.5]
         self.dropoutRatesForAllPathways = [self.dropNormal, self.dropSubsampled, self.dropFc, []]
-        
+
         #== Weight Initialization==
         self.convWInitMethod = cfg[cfg.CONV_W_INIT] if cfg[cfg.CONV_W_INIT] is not None else ["fanIn", 2]
         if not self.convWInitMethod[0] in ["normal", "fanIn"]:
@@ -248,11 +250,11 @@ class ModelParameters(object) :
         self.activationFunc = cfg[cfg.ACTIV_FUNC] if cfg[cfg.ACTIV_FUNC] is not None else "prelu"
         if not self.activationFunc in ["linear", "relu", "prelu", "elu", "selu"]:
             self.errorReqActivFunction()
-            
+
         #==BATCH NORMALIZATION==
         self.applyBnToInputOfPathways = [False, False, True] # Per pathway type. The 3rd entry, for FC, should always be True.
         self.bnRollAverOverThatManyBatches = cfg[cfg.BN_ROLL_AV_BATCHES] if cfg[cfg.BN_ROLL_AV_BATCHES] is not None else 60
-        
+
         #==============CALCULATED=====================
         # Residual Connections backwards, per pathway type :
         self.checkLayersForResidualsGivenDoNotInclude1st(residConnAtLayersNormal, residConnAtLayersSubsampled, residConnAtLayersFc)
@@ -262,7 +264,7 @@ class ModelParameters(object) :
                                                             [ layerNum - 1 for layerNum in residConnAtLayersFc ],
                                                             []
                                                         ]
-        
+
         self.indicesOfLowerRankLayersPerPathway = [[ layerNum - 1 for layerNum in lowerRankLayersNormal ],
                                                    [ layerNum - 1 for layerNum in lowerRankLayersSubsampled ],
                                                    [], #FC doesn't make sense to be lower rank. It's 1x1x1 anyway.
@@ -275,31 +277,31 @@ class ModelParameters(object) :
                                                      ]
         #============= HIDDENS ======================
         self.numberOfInputChannelsSubsampled = self.numberOfInputChannelsNormal
-        
+
         #MultiscaleConnections:
         self.convLayersToConnectToFirstFcForMultiscaleFromAllLayerTypes = [ [], [] ] #a sublist for each pathway. Starts from 0 index. Give a sublist, even empty for no connections.
         #... It's ok if I dont have a 2nd path but still give a 2nd sublist, it's controlled by nkernsSubsampled.
-        
+
         #-------POOLING---------- (not fully supported currently)
         #One entry per pathway-type. leave [] if the pathway does not exist or there is no mp there AT ALL.
         #Inside each entry, put a list FOR EACH LAYER. It should be [] for the layer if no mp there. But FOR EACH LAYER.
         #MP is applied >>AT THE INPUT of the layer<<. To use mp to a layer, put a list of [[dsr,dsc,dsz], [strr,strc,strz], [mirrorPad-r,-c,-z], mode] which give the dimensions of the mp window, the stride, how many times to mirror the last slot at each dimension for padding (give 0 for none), the mode (usually 'max' pool). Eg [[2,2,2],[1,1,1]] or [[2,2,2],[2,2,2]] usually.
-        #If a pathway is not used (eg subsampled), put an empty list in the first dimension entry. 
+        #If a pathway is not used (eg subsampled), put an empty list in the first dimension entry.
         mpParamsNorm = [ [] for layeri in range(len(self.numFMsPerLayerNormal)) ] #[[[2,2,2], [1,1,1], [1,1,1], 'MAX'], [],[],[],[],[],[], []], #first pathway
         mpParamsSubs = [ [] for layeri in range(len(self.numFMsPerLayerSubsampled[0])) ] if self.useSubsampledBool else [] # CAREFUL about the [0]. Only here till this structure is made different per pathway and not pathwayType.
         mpParamsFc = [ [] for layeri in range(len(self.numFMsInExtraFcs) + 1) ] #FC. This should NEVER be used for segmentation. Possible for classification though.
         self.maxPoolingParamsStructure = [ mpParamsNorm, mpParamsSubs, mpParamsFc]
-        
-        self.softmaxTemperature = 1.0 #Higher temperatures make the probabilities LESS distinctable. Actions have more similar probabilities. 
-        
-    
+
+        self.softmaxTemperature = 1.0 #Higher temperatures make the probabilities LESS distinctable. Actions have more similar probabilities.
+
+
     def print_params(self) :
         logPrint = self.log.print3
         logPrint("=============================================================")
         logPrint("========== PARAMETERS FOR MAKING THE ARCHITECTURE ===========")
         logPrint("=============================================================")
         logPrint("CNN model's name = " + str(self.cnnModelName))
-        
+
         logPrint("~~~~~~~~~~~~~~~~~~Model parameters~~~~~~~~~~~~~~~~")
         logPrint("Number of Classes (including background) = " + str(self.numberClasses))
         logPrint("~~Normal Pathway~~")
@@ -312,7 +314,7 @@ class ModelParameters(object) :
         logPrint("Layers that will be made of Lower Rank (indices from 0) = " + str(self.indicesOfLowerRankLayersPerPathway[0]))
         logPrint("Lower Rank layers will be made of rank = " + str(self.ranksOfLowerRankLayersForEachPathway[0]))
         #logPrint("Parameters for pooling before convolutions in this pathway = " +  + str(self.maxPoolingParamsStructure[0]))
-        
+
         logPrint("~~Subsampled Pathway~~")
         logPrint("Use subsampled Pathway = " + str(self.useSubsampledBool))
         logPrint("Number of subsampled pathways that will be built = " + str(len(self.subsampleFactor)) )
@@ -325,7 +327,7 @@ class ModelParameters(object) :
         logPrint("Layers that will be made of Lower Rank (indices from 0) = " + str(self.indicesOfLowerRankLayersPerPathway[1]))
         logPrint("Lower Rank layers will be made of rank = " + str(self.ranksOfLowerRankLayersForEachPathway[1]))
         #logPrint("Parameters for pooling before convolutions in this pathway = " +  + str(self.maxPoolingParamsStructure[1]))
-        
+
         logPrint("~~Fully Connected Pathway~~")
         logPrint("Number of additional FC layers (Excluding the Classif. Layer) = " + str(len(self.numFMsInExtraFcs)))
         logPrint("Number of Feature Maps in the additional FC layers = " + str(self.numFMsInExtraFcs))
@@ -333,32 +335,32 @@ class ModelParameters(object) :
         logPrint("Layers that will be made of Lower Rank (indices from 0) = " + str(self.indicesOfLowerRankLayersPerPathway[2]))
         #logPrint("Parameters for pooling before convolutions in this pathway = " +  + str(self.maxPoolingParamsStructure[2]))
         logPrint("Dimensions of Kernels in the 1st FC layer (Classif. layer if no hidden FCs used) = " + str(self.kernelDimensionsFirstFcLayer))
-        
+
         logPrint("~~Size Of Image Segments~~")
         logPrint("Size of Segments for Training = " + str(self.segmDimNormalTrain))
         logPrint("Size of Segments for Validation = " + str(self.segmDimNormalVal))
         logPrint("Size of Segments for Testing = " + str(self.segmDimNormalInfer))
-        
+
         logPrint("~~Dropout Rates~~")
         logPrint("Drop.R. for each layer in Normal Pathway = " + str(self.dropoutRatesForAllPathways[0]))
         logPrint("Drop.R. for each layer in Subsampled Pathway = " + str(self.dropoutRatesForAllPathways[1]))
         logPrint("Drop.R. for each layer in FC Pathway (additional FC layers + Classific.Layer at end) = " + str(self.dropoutRatesForAllPathways[2]))
-        
+
         logPrint("~~Weight Initialization~~")
         logPrint("Initialization method and params for the conv kernel weights = " + str(self.convWInitMethod))
-        
+
         logPrint("~~Activation Function~~")
         logPrint("Activation function to use = " + str(self.activationFunc))
-        
+
         logPrint("~~Batch Normalization~~")
         logPrint("Apply BN straight on pathways' inputs (eg straight on segments) = " + str(self.applyBnToInputOfPathways))
         logPrint("Batch Normalization uses a rolling average for inference, over this many batches = " + str(self.bnRollAverOverThatManyBatches))
-        
+
         logPrint("========== Done with printing session's parameters ==========")
         logPrint("=============================================================")
-        
+
     def get_args_for_arch(self) :
-        
+
         args = [
                         self.log,
                         self.cnnModelName,
@@ -373,12 +375,12 @@ class ModelParameters(object) :
                         self.numFMsPerLayerSubsampled,
                         self.kernDimPerLayerSubsampled,
                         self.subsampleFactor,
-                        
+
                         #=== FC Layers ===
                         self.numFMsInExtraFcs,
                         self.kernelDimensionsFirstFcLayer,
                         self.softmaxTemperature,
-                        
+
                         #=== Other Architectural params ===
                         self.activationFunc,
                         #---Residual Connections----
@@ -390,12 +392,12 @@ class ModelParameters(object) :
                         self.maxPoolingParamsStructure,
                         #--- Skip Connections --- #Deprecated, not used/supported
                         self.convLayersToConnectToFirstFcForMultiscaleFromAllLayerTypes,
-                        
+
                         #==Size of Image Segments ==
                         self.segmDimNormalTrain,
                         self.segmDimNormalVal,
                         self.segmDimNormalInfer,
-                        
+
                         #=== Others ====
                         #Dropout
                         self.dropoutRatesForAllPathways,
@@ -406,6 +408,6 @@ class ModelParameters(object) :
                         self.bnRollAverOverThatManyBatches
 
                         ]
-        
+
         return args
 
