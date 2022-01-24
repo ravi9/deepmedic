@@ -672,9 +672,9 @@ def report_metrics_for_subject(log, metrics_per_subj_per_c, subj_i, na_pattern, 
            " DICE2=" + strListFl4fNA(metrics_per_subj_per_c['dice2'][subj_i], na_pattern) +
            " DICE3=" + strListFl4fNA(metrics_per_subj_per_c['dice3'][subj_i], na_pattern))
     log_str = (f"{fwk}, {sub_id},"
-               f"DICE1={strListFl4fNA(metrics_per_subj_per_c['dice1'][subj_i], na_pattern)},"
-               f"DICE2={strListFl4fNA(metrics_per_subj_per_c['dice2'][subj_i], na_pattern)},"
-               f"DICE3={strListFl4fNA(metrics_per_subj_per_c['dice3'][subj_i], na_pattern)},")
+               f"DICE1,{metrics_per_subj_per_c['dice1'][subj_i][0]:.6f},{metrics_per_subj_per_c['dice1'][subj_i][0]:.6f},"
+               f"DICE2,{metrics_per_subj_per_c['dice2'][subj_i][0]:.6f},{metrics_per_subj_per_c['dice2'][subj_i][0]:.6f},"
+               f"DICE3,{metrics_per_subj_per_c['dice3'][subj_i][0]:.6f},{metrics_per_subj_per_c['dice3'][subj_i][0]:.6f},")
 
     with open(f"metrics_dice_{fwk}.csv", "a") as f:
         f.write(f"{log_str}\n")
