@@ -25,7 +25,7 @@ os.environ["KMP_WARNINGS"] = "FALSE"
 
 import argparse
 
-dm_root = "examples/tcga/savedmodels/fp32/"
+dm_root = "examples/tcga/savedmodels/fp32-ext/"
 
 parser = argparse.ArgumentParser(
     description="Quantizes an OpenVINO model to INT8.",
