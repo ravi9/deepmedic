@@ -19,6 +19,9 @@ from deepmedic.routines.testing import inference_on_whole_volumes
 import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior()
 
+import openvino_tensorflow
+openvino_tensorflow.set_backend('CPU')
+
 class TestSession(Session):
 
     def __init__(self, cfg):
