@@ -9,9 +9,9 @@ modelName = "vanilla-1-o4a"
 folderForOutput = "../../../output-vanilla-1-o4a/"
 
 # Frameworks to evaluate with
-# frameworks = ['tf', 'ov-fp32', 'ov-i8']
+frameworks = ['tf', 'ov-fp32', 'ov-i8']
 # frameworks = ['tf', 'ov-fp32', 'ov-i8', 'ov-igpu-fp32', 'ov-igpu-i8', 'ov-multi-fp32', ]
-frameworks = ['ov-fp32', 'ov-i8', 'ov-igpu-fp32', 'ov-igpu-fp16', 'ov-igpu-i8']
+# frameworks = ['ov-fp32', 'ov-i8', 'ov-igpu-fp32', 'ov-igpu-fp16', 'ov-igpu-i8']
 
 #  ================ MODEL PARAMETERS =================
 

@@ -16,7 +16,8 @@ from deepmedic.frontEnd.sessHelpers import makeFoldersNeededForTestingSession, h
 from deepmedic.neuralnet.cnn3d import Cnn3d
 from deepmedic.routines.testing import inference_on_whole_volumes
 
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
 
 class TestSession(Session):
 
