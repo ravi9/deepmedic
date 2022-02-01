@@ -1,14 +1,16 @@
-
 #!/bin/bash
 
+ROOT_FOLDER=/home/rpanchum/upenn/ravi9-dm-tf2
 
-CSV_FILE=/Share/ravi/upenn/data/brainmage-tcga-test-ds/tcga-test-ds-pre.csv
-#CSV_FILE=/Share/ravi/upenn/data/brainmage-tcga-test-ds/tcga-test-ds-pre-5rows.csv
-CSV_FILE=/Share/ravi/upenn/data/brainmage-tcga-test-ds/tcga-test-ds-pre-1rows.csv
-MOPREFIX=/home/rpanchum/upenn/ravi9-dm-tf2/examples/tcga/saved_models/skullStripping_modalityAgnostic/
+MOPREFIX=$ROOT_FOLDER/examples/tcga/saved_models/skullStripping_modalityAgnostic/
+
+CSV_FILE=/home/rpanchum/upenn/data/brainmage-tcga-test-ds/tcga-test-ds-pre.csv
+# CSV_FILE=/home/rpanchum/upenn/data/brainmage-tcga-test-ds/tcga-test-ds-pre-5rows.csv
+CSV_FILE=/home/rpanchum/upenn/data/brainmage-tcga-test-ds/tcga-test-ds-pre-1rows.csv
 
 i=0
 NUM_ROWS=$(wc -l $CSV_FILE)
+echo "Num Rows in CSV: $NUM_ROWS"
 
 while IFS=, read -r sub_id input_img mask_img input_img_pre
 do
@@ -19,7 +21,7 @@ do
 
     ./deepMedicRun -model $MOPREFIX/modelConfig.txt \
                -test $MOPREFIX/testConfig.cfg \
-               -load /home/rpanchum/upenn/ravi9-dm-tf2/examples/tcga/savedmodels/deepmedic-4-ov.model.ckpt
+               -load $ROOT_FOLDER/examples/tcga/savedmodels/deepmedic-4-ov.model.ckpt
 
    i=$((i+1))
    echo "##########^^^^^^^^^^^^^^^^^###############"
