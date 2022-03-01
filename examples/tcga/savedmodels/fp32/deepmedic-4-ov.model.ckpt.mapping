@@ -9,11 +9,43 @@
 		<IR name="net/inp_x_sub_0_test" output_port_id="0" />
 	</map>
 	<map>
+		<framework name="net/inp_x_sub_0_test" output_port_id="net/inp_x_sub_0_test:0" />
+		<IR name="net/inp_x_sub_0_test" output_port_id="0" />
+	</map>
+	<map>
+		<framework name="net/inp_x_sub_0_test" output_port_id="net/inp_x_sub_0_test" />
+		<IR name="net/inp_x_sub_0_test" output_port_id="0" />
+	</map>
+	<map>
+		<framework name="net/inp_x_sub_0_test" output_port_id="net/inp_x_sub_0_test" />
+		<IR name="net/inp_x_sub_0_test" output_port_id="0" />
+	</map>
+	<map>
+		<framework name="net/inp_x_sub_0_test" output_port_id="net/inp_x_sub_0_test" />
+		<IR name="net/inp_x_sub_0_test" output_port_id="0" />
+	</map>
+	<map>
 		<framework name="net/inp_x_test" output_port_id="net/inp_x_test:0" />
 		<IR name="net/inp_x_test" output_port_id="0" />
 	</map>
 	<map>
 		<framework name="net/inp_x_test" output_port_id="net/inp_x_test:0" />
+		<IR name="net/inp_x_test" output_port_id="0" />
+	</map>
+	<map>
+		<framework name="net/inp_x_test" output_port_id="net/inp_x_test:0" />
+		<IR name="net/inp_x_test" output_port_id="0" />
+	</map>
+	<map>
+		<framework name="net/inp_x_test" output_port_id="net/inp_x_test" />
+		<IR name="net/inp_x_test" output_port_id="0" />
+	</map>
+	<map>
+		<framework name="net/inp_x_test" output_port_id="net/inp_x_test" />
+		<IR name="net/inp_x_test" output_port_id="0" />
+	</map>
+	<map>
+		<framework name="net/inp_x_test" output_port_id="net/inp_x_test" />
 		<IR name="net/inp_x_test" output_port_id="0" />
 	</map>
 	<map>
@@ -177,12 +209,12 @@
 		<IR name="net/Maximum_2" output_port_id="2" />
 	</map>
 	<map>
-		<framework name="net/sub_5/sub" output_port_id="net/sub_5:0" />
-		<IR name="net/sub_5/sub" output_port_id="2" />
+		<framework name="net/sub_5" output_port_id="net/sub_5:0" />
+		<IR name="net/sub_5" output_port_id="2" />
 	</map>
 	<map>
 		<framework name="net/sub_5" output_port_id="net/sub_5:0" />
-		<IR name="net/sub_5/sub" output_port_id="2" />
+		<IR name="net/sub_5" output_port_id="2" />
 	</map>
 	<map>
 		<framework name="net/mul_7/Fused_Mul_" output_port_id="net/mul_8:0" />
@@ -265,12 +297,12 @@
 		<IR name="net/Maximum_5" output_port_id="2" />
 	</map>
 	<map>
-		<framework name="net/sub_11/sub" output_port_id="net/sub_11:0" />
-		<IR name="net/sub_11/sub" output_port_id="2" />
+		<framework name="net/sub_11" output_port_id="net/sub_11:0" />
+		<IR name="net/sub_11" output_port_id="2" />
 	</map>
 	<map>
 		<framework name="net/sub_11" output_port_id="net/sub_11:0" />
-		<IR name="net/sub_11/sub" output_port_id="2" />
+		<IR name="net/sub_11" output_port_id="2" />
 	</map>
 	<map>
 		<framework name="net/mul_16/Fused_Mul_" output_port_id="net/mul_17:0" />
@@ -353,12 +385,12 @@
 		<IR name="net/Maximum_8" output_port_id="2" />
 	</map>
 	<map>
-		<framework name="net/sub_17/sub" output_port_id="net/sub_17:0" />
-		<IR name="net/sub_17/sub" output_port_id="2" />
+		<framework name="net/sub_17" output_port_id="net/sub_17:0" />
+		<IR name="net/sub_17" output_port_id="2" />
 	</map>
 	<map>
 		<framework name="net/sub_17" output_port_id="net/sub_17:0" />
-		<IR name="net/sub_17/sub" output_port_id="2" />
+		<IR name="net/sub_17" output_port_id="2" />
 	</map>
 	<map>
 		<framework name="net/mul_25/Fused_Mul_" output_port_id="net/mul_26:0" />
@@ -441,12 +473,12 @@
 		<IR name="net/Maximum_11" output_port_id="2" />
 	</map>
 	<map>
-		<framework name="net/sub_23/sub" output_port_id="net/sub_23:0" />
-		<IR name="net/sub_23/sub" output_port_id="2" />
+		<framework name="net/sub_23" output_port_id="net/sub_23:0" />
+		<IR name="net/sub_23" output_port_id="2" />
 	</map>
 	<map>
 		<framework name="net/sub_23" output_port_id="net/sub_23:0" />
-		<IR name="net/sub_23/sub" output_port_id="2" />
+		<IR name="net/sub_23" output_port_id="2" />
 	</map>
 	<map>
 		<framework name="net/mul_34/Fused_Mul_" output_port_id="net/mul_35:0" />
@@ -529,12 +561,12 @@
 		<IR name="net/Maximum_14" output_port_id="2" />
 	</map>
 	<map>
-		<framework name="net/sub_29/sub" output_port_id="net/sub_29:0" />
-		<IR name="net/sub_29/sub" output_port_id="2" />
+		<framework name="net/sub_29" output_port_id="net/sub_29:0" />
+		<IR name="net/sub_29" output_port_id="2" />
 	</map>
 	<map>
 		<framework name="net/sub_29" output_port_id="net/sub_29:0" />
-		<IR name="net/sub_29/sub" output_port_id="2" />
+		<IR name="net/sub_29" output_port_id="2" />
 	</map>
 	<map>
 		<framework name="net/mul_43/Fused_Mul_" output_port_id="net/mul_44:0" />
@@ -617,12 +649,12 @@
 		<IR name="net/Maximum_17" output_port_id="2" />
 	</map>
 	<map>
-		<framework name="net/sub_35/sub" output_port_id="net/sub_35:0" />
-		<IR name="net/sub_35/sub" output_port_id="2" />
+		<framework name="net/sub_35" output_port_id="net/sub_35:0" />
+		<IR name="net/sub_35" output_port_id="2" />
 	</map>
 	<map>
 		<framework name="net/sub_35" output_port_id="net/sub_35:0" />
-		<IR name="net/sub_35/sub" output_port_id="2" />
+		<IR name="net/sub_35" output_port_id="2" />
 	</map>
 	<map>
 		<framework name="net/mul_52/Fused_Mul_" output_port_id="net/mul_53:0" />
@@ -705,12 +737,12 @@
 		<IR name="net/Maximum_20" output_port_id="2" />
 	</map>
 	<map>
-		<framework name="net/sub_41/sub" output_port_id="net/sub_41:0" />
-		<IR name="net/sub_41/sub" output_port_id="2" />
+		<framework name="net/sub_41" output_port_id="net/sub_41:0" />
+		<IR name="net/sub_41" output_port_id="2" />
 	</map>
 	<map>
 		<framework name="net/sub_41" output_port_id="net/sub_41:0" />
-		<IR name="net/sub_41/sub" output_port_id="2" />
+		<IR name="net/sub_41" output_port_id="2" />
 	</map>
 	<map>
 		<framework name="net/mul_61/Fused_Mul_" output_port_id="net/mul_62:0" />
@@ -913,12 +945,12 @@
 		<IR name="net/Maximum_23" output_port_id="2" />
 	</map>
 	<map>
-		<framework name="net/sub_47/sub" output_port_id="net/sub_47:0" />
-		<IR name="net/sub_47/sub" output_port_id="2" />
+		<framework name="net/sub_47" output_port_id="net/sub_47:0" />
+		<IR name="net/sub_47" output_port_id="2" />
 	</map>
 	<map>
 		<framework name="net/sub_47" output_port_id="net/sub_47:0" />
-		<IR name="net/sub_47/sub" output_port_id="2" />
+		<IR name="net/sub_47" output_port_id="2" />
 	</map>
 	<map>
 		<framework name="net/mul_70/Fused_Mul_" output_port_id="net/mul_71:0" />
@@ -1001,12 +1033,12 @@
 		<IR name="net/Maximum_26" output_port_id="2" />
 	</map>
 	<map>
-		<framework name="net/sub_53/sub" output_port_id="net/sub_53:0" />
-		<IR name="net/sub_53/sub" output_port_id="2" />
+		<framework name="net/sub_53" output_port_id="net/sub_53:0" />
+		<IR name="net/sub_53" output_port_id="2" />
 	</map>
 	<map>
 		<framework name="net/sub_53" output_port_id="net/sub_53:0" />
-		<IR name="net/sub_53/sub" output_port_id="2" />
+		<IR name="net/sub_53" output_port_id="2" />
 	</map>
 	<map>
 		<framework name="net/mul_79/Fused_Mul_" output_port_id="net/mul_80:0" />
@@ -1089,12 +1121,12 @@
 		<IR name="net/Maximum_29" output_port_id="2" />
 	</map>
 	<map>
-		<framework name="net/sub_59/sub" output_port_id="net/sub_59:0" />
-		<IR name="net/sub_59/sub" output_port_id="2" />
+		<framework name="net/sub_59" output_port_id="net/sub_59:0" />
+		<IR name="net/sub_59" output_port_id="2" />
 	</map>
 	<map>
 		<framework name="net/sub_59" output_port_id="net/sub_59:0" />
-		<IR name="net/sub_59/sub" output_port_id="2" />
+		<IR name="net/sub_59" output_port_id="2" />
 	</map>
 	<map>
 		<framework name="net/mul_88/Fused_Mul_" output_port_id="net/mul_89:0" />
@@ -1177,12 +1209,12 @@
 		<IR name="net/Maximum_32" output_port_id="2" />
 	</map>
 	<map>
-		<framework name="net/sub_65/sub" output_port_id="net/sub_65:0" />
-		<IR name="net/sub_65/sub" output_port_id="2" />
+		<framework name="net/sub_65" output_port_id="net/sub_65:0" />
+		<IR name="net/sub_65" output_port_id="2" />
 	</map>
 	<map>
 		<framework name="net/sub_65" output_port_id="net/sub_65:0" />
-		<IR name="net/sub_65/sub" output_port_id="2" />
+		<IR name="net/sub_65" output_port_id="2" />
 	</map>
 	<map>
 		<framework name="net/mul_97/Fused_Mul_" output_port_id="net/mul_98:0" />
@@ -1265,12 +1297,12 @@
 		<IR name="net/Maximum_35" output_port_id="2" />
 	</map>
 	<map>
-		<framework name="net/sub_71/sub" output_port_id="net/sub_71:0" />
-		<IR name="net/sub_71/sub" output_port_id="2" />
+		<framework name="net/sub_71" output_port_id="net/sub_71:0" />
+		<IR name="net/sub_71" output_port_id="2" />
 	</map>
 	<map>
 		<framework name="net/sub_71" output_port_id="net/sub_71:0" />
-		<IR name="net/sub_71/sub" output_port_id="2" />
+		<IR name="net/sub_71" output_port_id="2" />
 	</map>
 	<map>
 		<framework name="net/mul_106/Fused_Mul_" output_port_id="net/mul_107:0" />
@@ -1353,12 +1385,12 @@
 		<IR name="net/Maximum_38" output_port_id="2" />
 	</map>
 	<map>
-		<framework name="net/sub_77/sub" output_port_id="net/sub_77:0" />
-		<IR name="net/sub_77/sub" output_port_id="2" />
+		<framework name="net/sub_77" output_port_id="net/sub_77:0" />
+		<IR name="net/sub_77" output_port_id="2" />
 	</map>
 	<map>
 		<framework name="net/sub_77" output_port_id="net/sub_77:0" />
-		<IR name="net/sub_77/sub" output_port_id="2" />
+		<IR name="net/sub_77" output_port_id="2" />
 	</map>
 	<map>
 		<framework name="net/mul_115/Fused_Mul_" output_port_id="net/mul_116:0" />
@@ -1441,12 +1473,12 @@
 		<IR name="net/Maximum_41" output_port_id="2" />
 	</map>
 	<map>
-		<framework name="net/sub_83/sub" output_port_id="net/sub_83:0" />
-		<IR name="net/sub_83/sub" output_port_id="2" />
+		<framework name="net/sub_83" output_port_id="net/sub_83:0" />
+		<IR name="net/sub_83" output_port_id="2" />
 	</map>
 	<map>
 		<framework name="net/sub_83" output_port_id="net/sub_83:0" />
-		<IR name="net/sub_83/sub" output_port_id="2" />
+		<IR name="net/sub_83" output_port_id="2" />
 	</map>
 	<map>
 		<framework name="net/mul_124/Fused_Mul_" output_port_id="net/mul_125:0" />
@@ -2673,12 +2705,12 @@
 		<IR name="net/Maximum_44" output_port_id="2" />
 	</map>
 	<map>
-		<framework name="net/sub_89/sub" output_port_id="net/sub_89:0" />
-		<IR name="net/sub_89/sub" output_port_id="2" />
+		<framework name="net/sub_89" output_port_id="net/sub_89:0" />
+		<IR name="net/sub_89" output_port_id="2" />
 	</map>
 	<map>
 		<framework name="net/sub_89" output_port_id="net/sub_89:0" />
-		<IR name="net/sub_89/sub" output_port_id="2" />
+		<IR name="net/sub_89" output_port_id="2" />
 	</map>
 	<map>
 		<framework name="net/mul_151/Fused_Mul_" output_port_id="net/mul_152:0" />
@@ -2761,12 +2793,12 @@
 		<IR name="net/Maximum_47" output_port_id="2" />
 	</map>
 	<map>
-		<framework name="net/sub_95/sub" output_port_id="net/sub_95:0" />
-		<IR name="net/sub_95/sub" output_port_id="2" />
+		<framework name="net/sub_95" output_port_id="net/sub_95:0" />
+		<IR name="net/sub_95" output_port_id="2" />
 	</map>
 	<map>
 		<framework name="net/sub_95" output_port_id="net/sub_95:0" />
-		<IR name="net/sub_95/sub" output_port_id="2" />
+		<IR name="net/sub_95" output_port_id="2" />
 	</map>
 	<map>
 		<framework name="net/mul_160/Fused_Mul_" output_port_id="net/mul_161:0" />
@@ -2865,12 +2897,12 @@
 		<IR name="net/Maximum_50" output_port_id="2" />
 	</map>
 	<map>
-		<framework name="net/sub_101/sub" output_port_id="net/sub_101:0" />
-		<IR name="net/sub_101/sub" output_port_id="2" />
+		<framework name="net/sub_101" output_port_id="net/sub_101:0" />
+		<IR name="net/sub_101" output_port_id="2" />
 	</map>
 	<map>
 		<framework name="net/sub_101" output_port_id="net/sub_101:0" />
-		<IR name="net/sub_101/sub" output_port_id="2" />
+		<IR name="net/sub_101" output_port_id="2" />
 	</map>
 	<map>
 		<framework name="net/mul_172/Fused_Mul_" output_port_id="net/mul_173:0" />
@@ -2998,6 +3030,22 @@
 	</map>
 	<map>
 		<framework name="net/transpose_138" output_port_id="net/transpose_138:0" />
+		<IR name="net/transpose_138" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="net/transpose_138" output_port_id="net/transpose_138:0" />
+		<IR name="net/transpose_138" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="net/transpose_138" output_port_id="net/transpose_138" />
+		<IR name="net/transpose_138" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="net/transpose_138" output_port_id="net/transpose_138" />
+		<IR name="net/transpose_138" output_port_id="2" />
+	</map>
+	<map>
+		<framework name="net/transpose_138" output_port_id="net/transpose_138" />
 		<IR name="net/transpose_138" output_port_id="2" />
 	</map>
 </mapping>

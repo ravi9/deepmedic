@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import pudb;
+# import pudb;
 import os
 import numpy as np
 import json
@@ -18,14 +18,13 @@ from compression.engines.ie_engine import IEEngine
 from compression.graph import load_model, save_model
 from compression.graph.model_utils import compress_model_weights
 from compression.pipeline.initializer import create_pipeline
-from compression.utils.logger import init_logger
 import compression
 
 os.environ["KMP_WARNINGS"] = "FALSE"
 
 import argparse
 
-dm_root = "examples/tcga/savedmodels/fp32-ext/"
+dm_root = "examples/tcga/savedmodels/fp32/"
 
 parser = argparse.ArgumentParser(
     description="Quantizes an OpenVINO model to INT8.",
@@ -35,7 +34,7 @@ parser.add_argument("--xml_file", default=dm_root+"deepmedic-4-ov.model.ckpt.xml
                     help="XML file for OpenVINO to quantize")
 parser.add_argument("--bin_file", default=dm_root+"deepmedic-4-ov.model.ckpt.bin",
                 help="BIN file for OpenVINO to quantize")
-parser.add_argument("--manifest", default="/Share/ravi/upenn/data/tcga-deepmedic-batches-manifest-5rows.csv",
+parser.add_argument("--manifest", default="/home/rpanchum/upenn/data/tcga-deepmedic-batches-manifest-5rows.csv",
                 help="Manifest file (CSV with filenames of images and labels)")
 parser.add_argument("--data_dir", default="./data",
                 help="Data directory root")
@@ -305,7 +304,7 @@ metric_results_FP32 = pipeline.evaluate(model)
 
 compressed_model = pipeline.run(model)
 
-compression.graph.model_utils.save_model(compressed_model, save_path=args.int8_directory, model_name="deepmedic-4-ov.model.ckpt.int8", for_stat_collection=False)
+save_model(compressed_model, save_path=args.int8_directory, model_name="deepmedic-4-ov.model.ckpt.int8", for_stat_collection=False)
 
 print(bcolors.BOLD + "\nThe INT8 version of the model has been saved to the directory ".format(args.int8_directory) + \
     bcolors.HEADER + "{}\n".format(args.int8_directory) + bcolors.ENDC)
