@@ -323,25 +323,25 @@ def predict_whole_volume_by_tiling_ov(log, sessionTf, cnn3d,
 
     if fwk == 'ov-fp32' :
         #### Load FP32 OpenVINO model
-        ov_model_dir = 'examples/tcga/savedmodels/fp32-ext/'
+        ov_model_dir = 'examples/tcga/savedmodels/fp32/'
         modelname = 'deepmedic-4-ov.model.ckpt'
     elif fwk == 'ov-i8':
         #### Load INT8 OpenVINO model
-        ov_model_dir = 'int8_openvino_model-ext/'
+        ov_model_dir = 'int8_openvino_model/'
         modelname = 'deepmedic-4-ov.model.ckpt.int8'
     elif fwk == 'ov-igpu-fp32':
         #### Load INT8 OpenVINO model
-        ov_model_dir = 'examples/tcga/savedmodels/fp32-ext/'
+        ov_model_dir = 'examples/tcga/savedmodels/fp32/'
         modelname = 'deepmedic-4-ov.model.ckpt'
         ov_device = "GPU"
     elif fwk == 'ov-igpu-fp16':
         #### Load INT8 OpenVINO model
-        ov_model_dir = 'examples/tcga/savedmodels/fp16-ext/'
+        ov_model_dir = 'examples/tcga/savedmodels/fp16/'
         modelname = 'deepmedic-4-ov.model.ckpt'
         ov_device = "GPU"
     elif fwk == 'ov-igpu-i8':
         #### Load INT8 OpenVINO model
-        ov_model_dir = 'int8_openvino_model-ext/'
+        ov_model_dir = 'int8_openvino_model/'
         modelname = 'deepmedic-4-ov.model.ckpt.int8'
         ov_device = "GPU"
     else:
